@@ -87,7 +87,7 @@ export const orgSchema = () => ({
   name: site.name,
   legalName: site.legalName,
   url: site.url,
-  logo: abs("/logo.svg"),
+  logo: abs("/img/logo-mark.png"),
   foundingDate: site.founded,
   description:
     "Kinkalteck designs and builds automated vertical storage and retrieval systems (AS/RS) for long and heavy materials: steel bars, profiles, tubes and sheet metal.",
@@ -153,16 +153,38 @@ export const ctaBand = (title, text) => `
   </div>
 </section>`;
 
+// Responsive photo: WebP with JPEG fallback. Sizes are the source pixel sizes.
+const IMG = {
+  "honeycomb-aisle": [641, 360],
+  "honeycomb-aisle-2": [641, 360],
+  "long-material-crane": [641, 360],
+  "long-material-machines": [639, 359],
+  "sheet-metal-asrs": [579, 501],
+  "sheet-metal-install": [579, 458],
+  "sheet-metal-station": [583, 481],
+  "floor-stacked-tubes": [391, 220],
+  "cantilever-racks": [391, 220],
+  "stacked-plates": [417, 252],
+  "sheet-pallet": [412, 232],
+  "wms-dashboard": [814, 417],
+};
+export const photo = (name, alt, { eager = false, cls = "" } = {}) => {
+  const [w, h] = IMG[name];
+  return `<picture${cls ? ` class="${cls}"` : ""}><source type="image/webp" srcset="/img/${name}.webp"><img src="/img/${name}.jpg" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture>`;
+};
+
 // ---------- Page shell ----------
 export function layout({ title, description, path, body, schema = [], ogType = "website", noindex = false }) {
   const canonical = abs(path);
   const nav = [
-    ["/products/", "Products"],
+    ["/products/long-material-asrs/", "Long material"],
+    ["/products/sheet-metal-asrs/", "Sheet metal"],
+    ["/products/", "All systems"],
     ["/insights/", "Guides"],
     ["/contact/", "Contact"],
   ];
   const navHtml = nav
-    .map(([href, label]) => `<a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ""}>${label}</a>`)
+    .map(([href, label]) => `<a href="${href}"${path === href || (href !== "/products/" && path.startsWith(href)) ? ' aria-current="page"' : ""}>${label}</a>`)
     .join("");
   const ld = [orgSchema(), ...schema].map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n");
   const c = site.contact;
@@ -191,14 +213,26 @@ ${ld}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="utility">
+  <div class="wrap utility-inner">
+    <span>Automated storage for long and heavy materials, made in Foshan since ${site.founded}</span>
+    <span class="utility-links">
+      <a href="/#singapore">Singapore project</a>
+      <a href="mailto:${site.contact.email}">${site.contact.email}</a>
+    </span>
+  </div>
+</div>
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="/" aria-label="Kinkalteck home">
-      <img src="/logo.svg" alt="" width="32" height="32">
-      <span>Kinkalteck</span>
+      <img src="/img/logo-mark.png" alt="Kinkalteck" width="96" height="37">
     </a>
-    <nav aria-label="Main">${navHtml}</nav>
-    <a class="btn btn-primary btn-sm header-cta" href="/contact/">Get a price</a>
+    <nav class="main-nav" aria-label="Main">${navHtml}</nav>
+    <a class="btn btn-primary btn-sm header-cta" href="/contact/">Get a budget price</a>
+    <details class="mobile-menu">
+      <summary aria-label="Open menu">Menu</summary>
+      <nav aria-label="Mobile">${navHtml}<a class="btn btn-primary" href="/contact/">Get a budget price</a></nav>
+    </details>
   </div>
 </header>
 <main id="main">
@@ -207,6 +241,7 @@ ${body}
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
+      <img class="footer-logo" src="/img/logo-mark.png" alt="Kinkalteck" width="96" height="37">
       <p class="footer-brand">${esc(site.legalName)}</p>
       <p>Automated vertical storage for long and heavy materials, designed and built in Foshan, China, since ${site.founded}.</p>
       <p>${esc(site.address.street)}, ${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>

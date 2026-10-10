@@ -1,4 +1,4 @@
-import { layout, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema } from "../lib.mjs";
+import { layout, photo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema } from "../lib.mjs";
 
 const longSpecs = [
   ["Material", "Steel and aluminium bars, profiles, tubes and pipes"],
@@ -81,6 +81,11 @@ const longPage = {
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Long material AS/RS</span></nav>
   <h1>Honeycomb vertical storage for bars, profiles and tubes</h1>
   <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Your production machines can stand on the ground floor with material stored directly above them, a patented layout that removes unnecessary handling.</p>
+  <div class="gallery">
+    ${photo("long-material-machines", "Kinkalteck honeycomb long-material storage next to production machines", { eager: true, cls: "g-main" })}
+    ${photo("honeycomb-aisle-2", "Honeycomb rack aisle with steel profiles in cassettes")}
+    ${photo("long-material-crane", "Stacker crane in a long-material honeycomb store")}
+  </div>
   <h2>Specifications</h2>
   ${specTable(longSpecs)}
   <h2>What makes it different</h2>
@@ -128,6 +133,11 @@ const sheetPage = {
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Sheet metal AS/RS</span></nav>
   <h1>Cantilever vertical storage for sheet metal and plate</h1>
   <p class="lede">A modular cantilever rack with custom pallets stores sheets and plates up to 12 m long and delivers them to your production machines on demand. No more stacking damage, and far less floor space.</p>
+  <div class="gallery">
+    ${photo("sheet-metal-asrs", "Kinkalteck cantilever sheet metal storage tower with loading trolleys", { eager: true, cls: "g-main" })}
+    ${photo("sheet-metal-station", "Loading station of a cantilever sheet metal store")}
+    ${photo("sheet-metal-install", "Cantilever sheet metal storage installed in a factory")}
+  </div>
   <h2>Specifications</h2>
   ${specTable(sheetSpecs)}
   <h2>What makes it different</h2>

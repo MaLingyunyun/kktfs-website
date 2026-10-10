@@ -55,7 +55,13 @@ writeFileSync(
 ## Systems
 - [Long material AS/RS (honeycomb)](${site.url}/products/long-material-asrs/): 3–12 m material, up to 6 t per position, 100–9,999 positions, cassette pull-out retrieval, stacker crane 120 m/min, about 90 s per retrieval; patented layout with machines on the ground floor and material stored above.
 - [Sheet metal AS/RS (cantilever)](${site.url}/products/sheet-metal-asrs/): sheets 3–12 m long and 1–2 m wide, up to 6 t per position, 50–9,999 positions, telescopic fork or chain push-pull retrieval.
-- [All systems](${site.url}/products/): including overhead crane storage and mini vertical storage for tools and dies.
+- [Overhead crane storage](${site.url}/products/overhead-crane-storage/): crane-served racks for long bundles, usually without cassettes; about 200 positions where honeycomb storage fits about 150 in the same space.
+- [All systems](${site.url}/products/): including mini vertical storage for tools and dies.
+
+## How the system fits production
+- Inbound platform with automatic weighing; QR code on every bundle; WMS and WCS supplied by Kinkalteck with API connection to ERP.
+- Patented automatic picking and feeding to machines, first in first out, no material picker.
+- Works as a buffer between processes such as heat treatment and cutting, so material never goes back onto the floor.
 
 ## Guides
 ${insightPosts.map((p) => `- [${p.title}](${site.url}${p.path}): ${p.description}`).join("\n")}
@@ -99,6 +105,10 @@ https://:version.:project.pages.dev/*
 /styles.css
   Cache-Control: public, max-age=86400
 /*.svg
+  Cache-Control: public, max-age=604800
+/img/*
+  Cache-Control: public, max-age=604800
+/video/*
   Cache-Control: public, max-age=604800
 `
 );

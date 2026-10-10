@@ -1,11 +1,10 @@
-import { layout, ctaBand, faqBlock, faqSchema, photo, esc } from "../lib.mjs";
-import { heroElevation } from "../drawings.mjs";
+import { layout, ctaBand, faqBlock, faqSchema, photo, esc, howItWorksVideo } from "../lib.mjs";
 import { insightPosts } from "./insights.mjs";
 
 const faqs = [
   [
     "What materials can a Kinkalteck AS/RS store?",
-    "Steel and aluminium bars, profiles, tubes and pipes 3 to 12 m long in the honeycomb long-material system, and sheets and plates 3 to 12 m long and 1 to 2 m wide in the cantilever sheet metal system. Each storage position carries up to 6 tonnes.",
+    "Steel, copper, aluminium, titanium and other bars, profiles, tubes and pipes 3 to 12 m long in the honeycomb long-material system, and sheets and plates 3 to 12 m long and 1 to 2 m wide in the cantilever sheet metal system. Each storage position carries up to 6 tonnes.",
   ],
   [
     "How many storage positions can one system have?",
@@ -14,6 +13,10 @@ const faqs = [
   [
     "Can the storage sit above our saws or machines?",
     "Yes. In Kinkalteck's patented embedded layout, production machines stand on the ground floor and raw material is stored directly above them, so the store and the machines share one footprint.",
+  ],
+  [
+    "Does the system connect to our ERP?",
+    "Yes. Kinkalteck supplies the warehouse management system (WMS) and the control system (WCS), labels every bundle with a QR code, and connects to your ERP through an API.",
   ],
   [
     "How fast is retrieval?",
@@ -41,16 +44,16 @@ export default {
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <h1>Store long steel above your machines, not beside them</h1>
-      <p class="lede">Automated vertical storage for bars, profiles, tubes and sheet metal up to 12 m long. Material goes up into the rack, your floor space comes back, and your saws are fed without a crane or forklift.</p>
+      <p class="lede">Automated vertical storage for bars, profiles, tubes and sheet metal up to 12 m long. Material goes up into the rack, your floor space comes back, and your machines are fed without a crane, a forklift or a material picker.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/contact/">Get a budget price</a>
-        <a class="btn btn-ghost" href="/products/long-material-asrs/">See the long material system</a>
+        <a class="btn btn-ghost" href="#see-it-work">Watch how it works</a>
       </div>
       <p class="hero-note">Send your material sizes and floor plan. A sales engineer replies within one working day.</p>
     </div>
     <figure class="hero-photo">
-      ${photo("honeycomb-aisle", "Aisle of a Kinkalteck honeycomb storage system with long steel profiles stored in cassettes on both sides", { eager: true })}
-      <figcaption>Honeycomb long-material storage with cassettes on both sides of the stacker crane aisle</figcaption>
+      ${photo("hero-honeycomb", "Kinkalteck honeycomb storage with blue cassette racks on both sides of a stacker crane aisle", { eager: true })}
+      <figcaption>Honeycomb long-material storage, cassettes on both sides of the stacker crane aisle</figcaption>
     </figure>
   </div>
   <div class="wrap">
@@ -68,12 +71,12 @@ export default {
     <h2>What do you store?</h2>
     <div class="materials">
       <a class="material" href="/products/long-material-asrs/">
-        ${photo("honeycomb-aisle-2", "Steel profiles stored in a honeycomb rack")}
+        ${photo("aisle-grey", "Long profiles stored in a honeycomb rack")}
         <span class="material-name">Bars and profiles</span>
         <span class="material-note">Honeycomb storage, 3–12 m</span>
       </a>
       <a class="material" href="/products/long-material-asrs/">
-        ${photo("long-material-crane", "Long tubes in a honeycomb store with stacker crane")}
+        ${photo("loading-platform-tubes", "Tubes on the loading platform in front of a honeycomb store")}
         <span class="material-name">Tubes and pipes</span>
         <span class="material-note">Honeycomb storage, up to 6 t per position</span>
       </a>
@@ -82,95 +85,118 @@ export default {
         <span class="material-name">Sheets and plates</span>
         <span class="material-note">Cantilever storage, 1–2 m wide</span>
       </a>
-      <a class="material material-text" href="/products/">
-        <span class="material-name">Tools, dies and other loads</span>
-        <span class="material-note">Overhead crane storage and mini vertical storage</span>
-        <span class="text-link">Compare all systems</span>
+      <a class="material" href="/products/overhead-crane-storage/">
+        ${photo("crane-store-long", "Overhead crane serving a long-material storage rack")}
+        <span class="material-name">Large bundles</span>
+        <span class="material-note">Overhead crane storage, most loads without cassettes</span>
       </a>
     </div>
   </div>
 </section>
 
 <section class="section section-alt">
-  <div class="wrap problem-grid">
-    <div>
-      <h2>Where long material costs you money</h2>
-      <p class="section-lede">Many metal processors still keep bars and sheets in floor stacks and cantilever racks, moved by crane. That costs more than it seems.</p>
-      <ul class="problems">
-        <li><strong>Slow, risky handling.</strong> Heavy, bulky material moved by overhead crane or forklift is slow, and every lift is a safety risk.</li>
-        <li><strong>Damaged stock.</strong> Stacked bars and sheets bend, scratch and get lost. In a humid climate, they rust.</li>
-        <li><strong>Handled again and again.</strong> Material stored away from the machines means extra moves for every job.</li>
-        <li><strong>Floor space you pay for twice.</strong> Storage and production each take their own area of an expensive building.</li>
-        <li><strong>Machines waiting for material.</strong> Every minute a saw or laser waits for the crane lowers your OEE.</li>
-      </ul>
+  <div class="wrap">
+    <h2>From crane and floor stacks to a store that feeds the line</h2>
+    <p class="section-lede">Many plants still lift bars from floor stacks onto the saw by crane. Kinkalteck puts the material in a rack and brings it to the machine automatically.</p>
+    <div class="before-after">
+      <figure>
+        <span class="ba-label">Today</span>
+        ${photo("flow-before", "Illustration: an overhead crane lifting bars from a floor stack onto a saw infeed")}
+        <figcaption>A crane operator and a picker move every bundle from the floor to the saw.</figcaption>
+      </figure>
+      <figure>
+        <span class="ba-label ba-after">With Kinkalteck</span>
+        ${photo("flow-after", "Illustration: honeycomb racks and a stacker crane delivering material straight to the saw")}
+        <figcaption>The stacker crane takes the right bundle from the rack and delivers it to the saw.</figcaption>
+      </figure>
     </div>
-    <div class="before-photos">
-      <figure>${photo("cantilever-racks", "Steel tubes on conventional cantilever racks on the shop floor")}<figcaption>Typical today: cantilever racks taking up floor space</figcaption></figure>
-      <figure>${photo("stacked-plates", "Steel plates stacked on a pallet and lifted by crane clamps")}<figcaption>Plates stacked and moved one lift at a time</figcaption></figure>
-    </div>
+    <ul class="problems problems-grid">
+      <li><strong>Slow, risky handling.</strong> Every crane or forklift lift of heavy, bulky material is slow and a safety risk.</li>
+      <li><strong>Damaged and lost stock.</strong> Stacked bars and sheets bend, scratch and get lost. In a humid climate, they rust.</li>
+      <li><strong>Searching and digging.</strong> Pickers dig through stacks to find the right material, and wrong picks reach the machine.</li>
+      <li><strong>Floor space paid for twice.</strong> Storage and production each take their own area of an expensive building.</li>
+      <li><strong>Machines waiting.</strong> Every minute a saw waits for the crane lowers your overall equipment effectiveness (OEE).</li>
+      <li><strong>Stock you can't see.</strong> Handwritten records are never up to date, so planning works from guesses.</li>
+    </ul>
   </div>
 </section>
 
 <section class="section">
-  <div class="wrap embed-grid">
-    <figure class="embed-figure">
-      ${heroElevation()}
-    </figure>
+  <div class="wrap hub-grid">
     <div>
-      <h2>Machines below, material above</h2>
-      <p>Kinkalteck's patented embedded layout puts your saws and machines on the ground floor and stores raw material directly above them. Storage, buffer and machine feeding become one system in one footprint.</p>
+      <h2>Not just a store: the hub of your material flow</h2>
+      <p>The system follows your production process from the truck to the machine and back again.</p>
+      <ol class="flow">
+        <li><strong>Receive and weigh.</strong> Bundles are unloaded onto the inbound platform and weighed automatically as they enter storage.</li>
+        <li><strong>Identify and record.</strong> Every bundle gets a QR code and a digital identity. The WMS records it, the WCS tells the crane where to put it, and stock updates in your ERP through an API.</li>
+        <li><strong>Feed the machines.</strong> Our patented automatic picking and feeding delivers the right material to the machine on schedule, first in, first out, with no material picker.</li>
+        <li><strong>Buffer between processes.</strong> After heat treatment or cutting, material goes back into the rack instead of onto the floor, ready for the next step.</li>
+      </ol>
+    </div>
+    <div class="hub-side">
+      ${photo("rack-wall-orange", "Large honeycomb storage wall with blue cassettes and an orange stacker crane mast")}
+      <dl class="zeros" aria-label="What changes on the shop floor">
+        <div><dt>Waiting</dt><dd>Zero</dd></div>
+        <div><dt>Wrong picks</dt><dd>Zero</dd></div>
+        <div><dt>Digging through stacks</dt><dd>Zero</dd></div>
+        <div><dt>Material on the floor</dt><dd>Zero</dd></div>
+      </dl>
+      <p class="fine">Turnkey delivery: hardware, WMS and WCS from one supplier, with software changes made as your process changes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="see-it-work">
+  <div class="wrap embed-grid">
+    ${howItWorksVideo("3D animation: inbound platform, five-axis gantry retrieval robot and automatic feeding to the work station")}
+    <div>
+      <h2>See it work</h2>
+      <p>A five-axis gantry robot takes cassettes from the honeycomb rack and delivers material straight to the work station. Production machines can stand underneath the rack, so storage and production share one footprint, a layout protected by Kinkalteck patents.</p>
       <ul class="checks">
         <li>A lower level pitch than standard AS/RS fits more levels into the same building height</li>
-        <li>The stacker crane brings each cassette down to the machine in about 90 seconds</li>
-        <li>Part-used bundles go straight back into storage, not onto the floor</li>
+        <li>About 90 seconds per retrieval in a 2,000-position system</li>
+        <li>Part-used bundles go straight back into storage</li>
       </ul>
       <a class="text-link" href="/insights/building-size-for-long-material-asrs/">How much building do you need?</a>
     </div>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section">
   <div class="wrap">
-    <h2>Two systems, built for long and heavy material</h2>
-    <div class="systems">
+    <h2>Three ways to store long and heavy material</h2>
+    <div class="systems systems-3">
       <article class="system">
-        <a class="system-photo" href="/products/long-material-asrs/">${photo("long-material-machines", "Kinkalteck long-material storage with machines in the same hall")}</a>
+        <a class="system-photo" href="/products/long-material-asrs/">${photo("aisle-steel", "Aisle of a honeycomb long-material store")}</a>
         <h3><a href="/products/long-material-asrs/">Long material AS/RS</a></h3>
-        <p>A honeycomb rack of cassettes for bars, profiles and tubes, with machines underneath in a patented layout.</p>
+        <p>Honeycomb rack of cassettes for bars, profiles and tubes, with machines underneath.</p>
         <ul class="facts">
-          <li>3–12 m material, up to 6 t per position</li>
+          <li>3–12 m, up to 6 t per position</li>
           <li>100–9,999 positions</li>
-          <li>Cassette pull-out retrieval in about 90 s</li>
         </ul>
         <a class="btn btn-ghost btn-sm" href="/products/long-material-asrs/">Specifications</a>
       </article>
       <article class="system">
-        <a class="system-photo" href="/products/sheet-metal-asrs/">${photo("sheet-metal-install", "Kinkalteck cantilever sheet metal storage installed in a factory")}</a>
+        <a class="system-photo" href="/products/sheet-metal-asrs/">${photo("sheet-metal-install", "Cantilever sheet metal storage installed in a factory")}</a>
         <h3><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS</a></h3>
-        <p>A cantilever rack with custom pallets for sheets and plates, placed next to your cutting and forming machines.</p>
+        <p>Cantilever rack with custom pallets for sheets and plates, next to your machines.</p>
         <ul class="facts">
-          <li>3–12 m long, 1–2 m wide, up to 6 t per position</li>
+          <li>3–12 m × 1–2 m, up to 6 t per position</li>
           <li>50–9,999 positions</li>
-          <li>Telescopic fork or chain push-pull retrieval</li>
         </ul>
         <a class="btn btn-ghost btn-sm" href="/products/sheet-metal-asrs/">Specifications</a>
       </article>
+      <article class="system">
+        <a class="system-photo" href="/products/overhead-crane-storage/">${photo("crane-store-render", "3D view of an overhead crane storage system with trucks at the loading area")}</a>
+        <h3><a href="/products/overhead-crane-storage/">Overhead crane storage</a></h3>
+        <p>Crane-served racks for large bundles, usually without cassettes, at a lower cost per position.</p>
+        <ul class="facts">
+          <li>More positions in the same space</li>
+          <li>Suits tall buildings with crane height</li>
+        </ul>
+        <a class="btn btn-ghost btn-sm" href="/products/overhead-crane-storage/">Details</a>
+      </article>
     </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap software-grid">
-    <div>
-      <h2>Every bundle tracked, in real time</h2>
-      <p>The warehouse software knows where every bundle and sheet is, how much is left and what the machines need next. It can exchange stock and order data with your ERP or MES, so your planners see the store as it really is.</p>
-      <ul class="checks">
-        <li>Live stock by position, material and order</li>
-        <li>Retrieval jobs sent straight to the stacker crane</li>
-        <li>Dashboard for throughput and storage use</li>
-      </ul>
-    </div>
-    <figure class="screen">${photo("wms-dashboard", "Kinkalteck warehouse management dashboard showing storage use and throughput")}</figure>
   </div>
 </section>
 
@@ -198,6 +224,22 @@ export default {
 
 <section class="section">
   <div class="wrap">
+    <h2>Built for plants that handle long and heavy material</h2>
+    <ul class="industries">
+      <li><strong>Non-ferrous bar producers</strong>Copper, aluminium, titanium and alloy bars</li>
+      <li><strong>Steel tube and pipe makers</strong>Precision tubes, ERW pipe, seamless tube</li>
+      <li><strong>Metal cutting service centres</strong>Raw material and finished-part storage</li>
+      <li><strong>Steel stockholders</strong>Fast picking of mixed bars and profiles</li>
+      <li><strong>Forging and heat treatment</strong>A buffer between processes, off the floor</li>
+      <li><strong>Valve and machinery makers</strong>Bar stock for machining lines</li>
+      <li><strong>Shipyards and tower fabricators</strong>Profiles and plates for fabrication</li>
+      <li><strong>Aluminium profile and sheet processors</strong>Profiles, sheets and plates</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
     <div class="section-head">
       <h2>Planning guides</h2>
       <a class="text-link" href="/insights/">All guides</a>
@@ -210,10 +252,8 @@ export default {
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section">
   <div class="wrap narrow">
-    <h2>Who uses it</h2>
-    <p>Metal forging plants, sheet metal processors, aluminium profile makers, ERW pipe and seamless tube producers, and steel stockholders.</p>
     ${faqBlock(faqs)}
   </div>
 </section>

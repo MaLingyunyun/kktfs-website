@@ -1,4 +1,5 @@
-import { layout, photo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema } from "../lib.mjs";
+import { heroElevation } from "../drawings.mjs";
+import { layout, photo, howItWorksVideo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema } from "../lib.mjs";
 
 const longSpecs = [
   ["Material", "Steel and aluminium bars, profiles, tubes and pipes"],
@@ -82,12 +83,14 @@ const longPage = {
   <h1>Honeycomb vertical storage for bars, profiles and tubes</h1>
   <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Your production machines can stand on the ground floor with material stored directly above them, a patented layout that removes unnecessary handling.</p>
   <div class="gallery">
-    ${photo("long-material-machines", "Kinkalteck honeycomb long-material storage next to production machines", { eager: true, cls: "g-main" })}
-    ${photo("honeycomb-aisle-2", "Honeycomb rack aisle with steel profiles in cassettes")}
-    ${photo("long-material-crane", "Stacker crane in a long-material honeycomb store")}
+    ${photo("aisle-steel", "Aisle of a Kinkalteck honeycomb long-material store with profiles in cassettes", { eager: true, cls: "g-main" })}
+    ${photo("rack-wall-orange", "Honeycomb storage wall with blue cassettes and orange stacker crane mast")}
+    ${photo("loading-platform-tubes", "Tubes on the loading platform of a honeycomb store")}
   </div>
   <h2>Specifications</h2>
   ${specTable(longSpecs)}
+  <h2>Machines below, material above</h2>
+  <figure class="embed-figure">${heroElevation()}</figure>
   <h2>What makes it different</h2>
   <ul>
     <li><strong>More levels in the same height.</strong> A lower level pitch than standard AS/RS fits more storage levels into your building.</li>
@@ -95,6 +98,15 @@ const longPage = {
     <li><strong>Storage, buffer and machine feeding in one system.</strong> Every bundle has a known position, and stock updates in real time.</li>
     <li><strong>Fast returns.</strong> Part-used bundles go back into storage quickly, instead of piling up beside the saw.</li>
   </ul>
+  <h2>Built into your production flow</h2>
+  <ul>
+    <li><strong>Automatic weighing</strong> as bundles enter storage from the inbound platform.</li>
+    <li><strong>QR code on every bundle</strong>, with WMS and WCS software and an API connection to your ERP.</li>
+    <li><strong>Patented automatic picking and feeding</strong> delivers material to the machine first in, first out, with no material picker.</li>
+    <li><strong>A buffer between processes</strong>: material comes back after heat treatment or cutting instead of going onto the floor.</li>
+  </ul>
+  <h2>See it work</h2>
+  ${howItWorksVideo("3D animation: inbound platform, five-axis gantry retrieval robot and automatic feeding to the work station")}
   <h2>What we need to size your system</h2>
   <ol>
     <li>Longest material length and the bundle width, height and weight</li>
@@ -173,7 +185,7 @@ const overview = {
     <tbody>
       <tr><td><a href="/products/long-material-asrs/">Long material AS/RS (honeycomb)</a></td><td>Bars, profiles, tubes, pipes</td><td>3–12 m, up to 6 t per position</td><td>100–9,999</td></tr>
       <tr><td><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS (cantilever)</a></td><td>Sheets and plates</td><td>3–12 m × 1–2 m, up to 6 t per position</td><td>50–9,999</td></tr>
-      <tr><td>Overhead crane storage</td><td>Long bundles, usually without cassettes</td><td>Ask us</td><td>Ask us</td></tr>
+      <tr><td><a href="/products/overhead-crane-storage/">Overhead crane storage</a></td><td>Large long bundles, usually without cassettes</td><td>Ask us</td><td>About a third more positions than honeycomb in the same space</td></tr>
       <tr><td>Mini vertical storage</td><td>Tools, dies, moulds, MRO parts</td><td>Ask us</td><td>Ask us</td></tr>
     </tbody>
   </table></div>
@@ -185,4 +197,72 @@ ${ctaBand("Not sure which system fits?", "Send your material list and floor plan
     }),
 };
 
-export default [overview, longPage, sheetPage];
+
+const craneSpecs = [
+  ["Material", "Long bundles of bars, profiles and tubes"],
+  ["Cassettes", "Usually not required"],
+  ["Positions in the same space", "About 200, where honeycomb storage fits about 150"],
+  ["Position size", "Material + 700 mm length, + 100 mm width, + 100 mm height"],
+  ["Crane height allowance", "About 1,500 mm above the top level"],
+  ["First storage level", "About 1,000 mm above the floor"],
+  ["Typical floor load requirement", "10 t/m²"],
+];
+
+const craneFaqs = [
+  [
+    "When is overhead crane storage the better choice?",
+    "When the building has the height for the crane and you want the most positions and the lowest cost per position. Space decides first; when the building suits both types, we compare positions and cost for you.",
+  ],
+  [
+    "Do I need cassettes?",
+    "Usually not. Most bundles are stored directly in the rack, which saves the cost and weight of cassettes. Honeycomb storage, by contrast, needs a cassette in every position.",
+  ],
+];
+
+const cranePage = {
+  path: "/products/overhead-crane-storage/",
+  render: () =>
+    layout({
+      path: "/products/overhead-crane-storage/",
+      title: "Overhead Crane Vertical Storage for Long Bundles | Kinkalteck",
+      description:
+        "Crane-served vertical storage for long bundles, usually without cassettes. About a third more positions than honeycomb storage in the same space.",
+      schema: [
+        productSchema({
+          name: "Kinkalteck overhead crane vertical storage",
+          description:
+            "Automated overhead-crane vertical storage for long bundles of bars, profiles and tubes, usually without cassettes.",
+          path: "/products/overhead-crane-storage/",
+          specs: craneSpecs,
+        }),
+        faqSchema(craneFaqs),
+        breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Overhead crane storage", "/products/overhead-crane-storage/"]]),
+      ],
+      body: `
+<div class="wrap narrow page">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Overhead crane storage</span></nav>
+  <h1>Overhead crane vertical storage for long bundles</h1>
+  <p class="lede">An automated overhead crane serves tall racks of long material. Most bundles are stored without cassettes, so the same space holds more positions at a lower cost per position.</p>
+  <div class="gallery">
+    ${photo("crane-store-long", "Overhead crane serving a long-material storage rack", { eager: true, cls: "g-main" })}
+    ${photo("crane-store-render", "3D view of an overhead crane storage system with trucks at the loading area")}
+    ${photo("crane-store-install", "Overhead crane storage during installation")}
+  </div>
+  <h2>Specifications</h2>
+  ${specTable(craneSpecs)}
+  <p class="fine">Load, length and number of positions are set for each project. Send your material list for a full specification.</p>
+  <h2>What makes it different</h2>
+  <ul>
+    <li><strong>More positions per square metre.</strong> In the same space, about 200 positions instead of about 150 with honeycomb storage.</li>
+    <li><strong>No cassettes for most loads.</strong> Lower system cost and less dead weight.</li>
+    <li><strong>Lower cost per position.</strong> A strong fit for large stocks of similar bundles.</li>
+    <li><strong>Same software.</strong> QR-coded bundles, WMS, WCS and ERP connection, as in every Kinkalteck system.</li>
+  </ul>
+  ${faqBlock(craneFaqs)}
+</div>
+${ctaBand("Compare crane and honeycomb storage for your building", "Send your floor plan and material list. We'll compare positions and cost for both types.")}
+`,
+    }),
+};
+
+export default [overview, longPage, sheetPage, cranePage];

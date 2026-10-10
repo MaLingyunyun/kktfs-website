@@ -160,23 +160,39 @@ export const ctaBand = (title, text) => `
 
 // Responsive photo: WebP with JPEG fallback. Sizes are the source pixel sizes.
 const IMG = {
-  "honeycomb-aisle": [641, 360],
-  "honeycomb-aisle-2": [641, 360],
-  "long-material-crane": [641, 360],
-  "long-material-machines": [639, 359],
+  "hero-honeycomb": [1200, 675],
+  "aisle-grey": [1200, 675],
+  "rack-blue-perspective": [1200, 675],
+  "aisle-steel": [1200, 675],
+  "rack-wall-orange": [1200, 675],
+  "crane-store-long": [900, 560],
+  "crane-store-render": [900, 560],
+  "sheet-loading-stations": [900, 560],
+  "crane-honeycomb": [500, 375],
+  "crane-store-tall": [500, 375],
+  "rack-wall-blue": [500, 375],
+  "loading-platform-tubes": [500, 281],
+  "crane-store-install": [500, 375],
+  "flow-before": [1600, 1003],
+  "flow-after": [1600, 741],
+  "crane-store-portrait": [780, 1172],
   "sheet-metal-asrs": [579, 501],
   "sheet-metal-install": [579, 458],
   "sheet-metal-station": [583, 481],
-  "floor-stacked-tubes": [391, 220],
-  "cantilever-racks": [391, 220],
-  "stacked-plates": [417, 252],
-  "sheet-pallet": [412, 232],
-  "wms-dashboard": [814, 417],
 };
 export const photo = (name, alt, { eager = false, cls = "" } = {}) => {
   const [w, h] = IMG[name];
   return `<picture${cls ? ` class="${cls}"` : ""}><source type="image/webp" srcset="/img/${name}.webp"><img src="/img/${name}.jpg" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture>`;
 };
+
+// The 3D animation, loaded only when the visitor presses play
+export const howItWorksVideo = (caption) => `
+<figure class="video">
+  <video controls muted playsinline preload="none" poster="/video/how-it-works-poster.jpg" width="960" height="720">
+    <source src="/video/how-it-works.mp4" type="video/mp4">
+  </video>
+  <figcaption>${esc(caption)}</figcaption>
+</figure>`;
 
 // ---------- Page shell ----------
 export function layout({ title, description, path, body, schema = [], ogType = "website", noindex = false }) {
@@ -230,7 +246,7 @@ ${ld}
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="/" aria-label="Kinkalteck home">
-      <img src="/img/logo-mark.png" alt="Kinkalteck" width="96" height="37">
+      <img src="/img/logo-mark.png" alt="Kinkalteck" width="110" height="42">
     </a>
     <nav class="main-nav" aria-label="Main">${navHtml}</nav>
     <a class="btn btn-primary btn-sm header-cta" href="/contact/">Get a budget price</a>
@@ -256,6 +272,7 @@ ${body}
       <ul>
         <li><a href="/products/long-material-asrs/">Long material AS/RS</a></li>
         <li><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS</a></li>
+        <li><a href="/products/overhead-crane-storage/">Overhead crane storage</a></li>
         <li><a href="/products/">All systems</a></li>
       </ul>
     </div>

@@ -1,4 +1,9 @@
 import { site } from "../site.config.mjs";
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+
+// Changes whenever styles.css changes, so browsers never use an outdated stylesheet
+const CSS_V = createHash("md5").update(readFileSync(new URL("../public/styles.css", import.meta.url))).digest("hex").slice(0, 8);
 
 export const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -208,7 +213,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=${CSS_V}">
 ${ld}
 </head>
 <body>

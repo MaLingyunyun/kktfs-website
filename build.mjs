@@ -89,7 +89,11 @@ writeFileSync(
 // Cloudflare Pages: caching and security headers
 writeFileSync(
   join(out, "_headers"),
-  `/*
+  `https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 /styles.css

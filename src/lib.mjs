@@ -1,0 +1,239 @@
+import { site } from "../site.config.mjs";
+
+export const esc = (s = "") =>
+  String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+export const abs = (path) => site.url + path;
+
+// ---------- Minimal Markdown (headings, paragraphs, lists, tables, bold, italic, links, code) ----------
+const inline = (s) =>
+  esc(s)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>")
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) => {
+      const ext = /^https?:/.test(u) && !u.startsWith(site.url);
+      return `<a href="${u}"${ext ? ' rel="noopener"' : ""}>${t}</a>`;
+    });
+
+export function markdown(src) {
+  const lines = src.replace(/\r/g, "").split("\n");
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (!line.trim()) { i++; continue; }
+    const h = line.match(/^(#{2,4})\s+(.*)$/);
+    if (h) {
+      const lvl = h[1].length;
+      const id = h[2].toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      out.push(`<h${lvl} id="${id}">${inline(h[2])}</h${lvl}>`);
+      i++; continue;
+    }
+    if (/^\|.*\|\s*$/.test(line) && /^\|\s*:?-{3,}/.test(lines[i + 1] || "")) {
+      const cells = (l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+      const head = cells(line);
+      i += 2;
+      const rows = [];
+      while (i < lines.length && /^\|.*\|\s*$/.test(lines[i])) rows.push(cells(lines[i++]));
+      out.push(
+        `<div class="table-wrap"><table><thead><tr>${head.map((c) => `<th scope="col">${inline(c)}</th>`).join("")}</tr></thead><tbody>${rows
+          .map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join("")}</tr>`)
+          .join("")}</tbody></table></div>`
+      );
+      continue;
+    }
+    if (/^(\s*)([-*]|\d+\.)\s+/.test(line)) {
+      const ordered = /^\s*\d+\./.test(line);
+      const items = [];
+      while (i < lines.length && /^(\s*)([-*]|\d+\.)\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^(\s*)([-*]|\d+\.)\s+/, ""));
+        i++;
+      }
+      const tag = ordered ? "ol" : "ul";
+      out.push(`<${tag}>${items.map((t) => `<li>${inline(t)}</li>`).join("")}</${tag}>`);
+      continue;
+    }
+    if (line.startsWith("> ")) {
+      const q = [];
+      while (i < lines.length && lines[i].startsWith("> ")) q.push(lines[i++].slice(2));
+      out.push(`<blockquote><p>${inline(q.join(" "))}</p></blockquote>`);
+      continue;
+    }
+    const para = [];
+    while (i < lines.length && lines[i].trim() && !/^(#{2,4}\s|\||\s*[-*]\s|\s*\d+\.\s|> )/.test(lines[i])) para.push(lines[i++]);
+    out.push(`<p>${inline(para.join(" "))}</p>`);
+  }
+  return out.join("\n");
+}
+
+// Front matter: lines of "key: value" between --- markers
+export function parseFrontMatter(text) {
+  const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!m) return { data: {}, body: text };
+  const data = {};
+  for (const l of m[1].split("\n")) {
+    const kv = l.match(/^(\w+):\s*(.*)$/);
+    if (kv) data[kv[1]] = kv[2].replace(/^"|"$/g, "");
+  }
+  return { data, body: m[2] };
+}
+
+// ---------- Structured data ----------
+export const orgSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": abs("/#organization"),
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  logo: abs("/logo.svg"),
+  foundingDate: site.founded,
+  description:
+    "Kinkalteck designs and builds automated vertical storage and retrieval systems (AS/RS) for long and heavy materials: steel bars, profiles, tubes and sheet metal.",
+  email: site.contact.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  sameAs: Object.values(site.social).filter(Boolean),
+});
+
+export const breadcrumbSchema = (items) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map(([name, path], i) => ({ "@type": "ListItem", position: i + 1, name, item: abs(path) })),
+});
+
+export const productSchema = ({ name, description, path, specs }) => ({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name,
+  description,
+  url: abs(path),
+  brand: { "@type": "Brand", name: site.name },
+  manufacturer: { "@id": abs("/#organization") },
+  category: "Automated storage and retrieval system (AS/RS)",
+  additionalProperty: specs.map(([k, v]) => ({ "@type": "PropertyValue", name: k, value: v })),
+});
+
+export const faqSchema = (faqs) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+});
+
+// ---------- Shared pieces ----------
+export const specTable = (rows, caption) => `
+<div class="table-wrap"><table class="spec">
+${caption ? `<caption>${esc(caption)}</caption>` : ""}
+<tbody>${rows.map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}</tbody>
+</table></div>`;
+
+export const faqBlock = (faqs) => `
+<section class="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Questions buyers ask</h2>
+  ${faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}
+</section>`;
+
+export const ctaBand = (title, text) => `
+<section class="cta-band">
+  <div class="wrap cta-inner">
+    <div>
+      <h2>${esc(title)}</h2>
+      <p>${esc(text)}</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="/contact/">Get a budget price</a>
+      ${site.contact.whatsapp ? `<a class="btn btn-ghost" href="https://wa.me/${site.contact.whatsapp}">Chat on WhatsApp</a>` : ""}
+    </div>
+  </div>
+</section>`;
+
+// ---------- Page shell ----------
+export function layout({ title, description, path, body, schema = [], ogType = "website", noindex = false }) {
+  const canonical = abs(path);
+  const nav = [
+    ["/products/", "Products"],
+    ["/insights/", "Guides"],
+    ["/contact/", "Contact"],
+  ];
+  const navHtml = nav
+    .map(([href, label]) => `<a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ""}>${label}</a>`)
+    .join("");
+  const ld = [orgSchema(), ...schema].map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n");
+  const c = site.contact;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<link rel="canonical" href="${canonical}">
+<link rel="alternate" hreflang="en" href="${canonical}">
+<link rel="alternate" hreflang="x-default" href="${canonical}">
+${noindex ? '<meta name="robots" content="noindex">' : ""}
+<meta property="og:type" content="${ogType}">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:url" content="${canonical}">
+<meta property="og:site_name" content="${site.name}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/styles.css">
+${ld}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Kinkalteck home">
+      <img src="/logo.svg" alt="" width="32" height="32">
+      <span>Kinkalteck</span>
+    </a>
+    <nav aria-label="Main">${navHtml}</nav>
+    <a class="btn btn-primary btn-sm header-cta" href="/contact/">Get a price</a>
+  </div>
+</header>
+<main id="main">
+${body}
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">${esc(site.legalName)}</p>
+      <p>Automated vertical storage for long and heavy materials, designed and built in Foshan, China, since ${site.founded}.</p>
+      <p>${esc(site.address.street)}, ${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
+    </div>
+    <div>
+      <p class="footer-h">Systems</p>
+      <ul>
+        <li><a href="/products/long-material-asrs/">Long material AS/RS</a></li>
+        <li><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS</a></li>
+        <li><a href="/products/">All systems</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-h">Contact</p>
+      <ul>
+        <li><a href="mailto:${c.email}">${c.email}</a></li>
+        ${c.phoneIntl ? `<li><a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></li>` : ""}
+        ${c.whatsapp ? `<li><a href="https://wa.me/${c.whatsapp}">WhatsApp</a></li>` : ""}
+        <li><a href="${site.sisterSite.url}" rel="noopener">${esc(site.sisterSite.name)}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <p>© ${new Date().getFullYear()} ${esc(site.legalName)}</p>
+  </div>
+</footer>
+${c.whatsapp ? `<a class="wa-float" href="https://wa.me/${c.whatsapp}" aria-label="Chat with us on WhatsApp">WhatsApp</a>` : ""}
+</body>
+</html>`;
+}

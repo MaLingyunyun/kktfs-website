@@ -9,7 +9,8 @@
 | `site.config.mjs` | 公司名称、地址、邮箱、WhatsApp/Zalo/LINE、社交账号。**联系方式只改这里。** 留空的项目不会在网站上显示 |
 | `src/pages/` | 首页、产品页、联系页、文章列表的页面模板 |
 | `content/insights/` | 行业文章和技术指南，每篇一个 `.md` 文件 |
-| `public/` | 样式、logo、图片，原样复制到网站 |
+| `public/` | 样式、logo、图片、字体、图标，原样复制到网站 |
+| `docs/fonts.md` | **字体规定：中英文网站和所有配图、视频只用可商用字体**（目前用 Archivo，SIL OFL 开源协议，已放在 `public/fonts/`） |
 | `functions/api/enquiry.js` | 询盘表单的处理程序（Cloudflare Pages Function） |
 | `build.mjs` | 生成网站，同时生成 sitemap.xml、robots.txt、llms.txt 和旧网址跳转 |
 

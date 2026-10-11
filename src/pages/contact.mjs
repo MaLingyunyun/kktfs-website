@@ -1,4 +1,4 @@
-import { layout, esc, breadcrumbSchema } from "../lib.mjs";
+import { layout, esc, breadcrumbSchema, icon } from "../lib.mjs";
 import { site } from "../../site.config.mjs";
 
 const c = site.contact;
@@ -47,15 +47,15 @@ const contact = {
   <aside class="contact-side">
     <h2>Other ways to reach us</h2>
     <ul>
-      <li>Email: <a href="mailto:${c.email}">${c.email}</a></li>
-      ${c.whatsapp ? `<li>WhatsApp: <a href="https://wa.me/${c.whatsapp}">Start a chat</a></li>` : ""}
-      ${c.zalo ? `<li>Zalo: ${esc(c.zalo)}</li>` : ""}
-      ${c.line ? `<li>LINE: ${esc(c.line)}</li>` : ""}
-      ${c.wechat ? `<li>WeChat: ${esc(c.wechat)}</li>` : ""}
-      ${c.phoneIntl ? `<li>Phone: <a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></li>` : ""}
+      <li>${icon("mail")}<span>Email: <a href="mailto:${c.email}">${c.email}</a></span></li>
+      ${c.whatsapp ? `<li>${icon("chat")}<span>WhatsApp: <a href="https://wa.me/${c.whatsapp}">Start a chat</a></span></li>` : ""}
+      ${c.zalo ? `<li>${icon("chat")}<span>Zalo: ${esc(c.zalo)}</span></li>` : ""}
+      ${c.line ? `<li>${icon("chat")}<span>LINE: ${esc(c.line)}</span></li>` : ""}
+      ${c.wechat ? `<li>${icon("chat")}<span>WeChat: ${esc(c.wechat)}</span></li>` : ""}
+      ${c.phoneIntl ? `<li>${icon("phone")}<span>Phone: <a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></span></li>` : ""}
     </ul>
     <h2>Factory</h2>
-    <p>${esc(site.legalName)}<br>${esc(site.address.street)}<br>${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
+    <p class="factory">${esc(site.legalName)}<br>${esc(site.address.street)}<br>${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
   </aside>
 </div>
 `,

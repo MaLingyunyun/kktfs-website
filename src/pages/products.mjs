@@ -1,4 +1,4 @@
-import { layout, photo, howItWorksVideo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema } from "../lib.mjs";
+import { layout, photo, howItWorksVideo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema, pageHead, lengthRuler } from "../lib.mjs";
 
 const longSpecs = [
   ["Material", "Steel and non-ferrous bars, profiles, tubes and pipes"],
@@ -99,10 +99,14 @@ const longPage = {
         breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Long material AS/RS", "/products/long-material-asrs/"]]),
       ],
       body: `
+${pageHead({
+  crumbs: [["Home", "/"], ["Products", "/products/"], ["Long material AS/RS", ""]],
+  title: "Honeycomb vertical storage for bars, profiles and tubes",
+  lede: "Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Saws and other machines stand right beside the store, a patented embedded design, so storage and production share one area.",
+  iconName: "bar-round",
+  figures: [["Material length", "3–12 m"], ["Load per position", "Up to 6 t"], ["Storage positions", "100–3,000"]],
+})}
 <div class="wrap narrow page">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Long material AS/RS</span></nav>
-  <h1>Honeycomb vertical storage for bars, profiles and tubes</h1>
-  <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Saws and other machines stand right beside the store, a patented embedded design, so storage and production share one area.</p>
   <div class="gallery">
     ${photo("aisle-steel", "Aisle of a Kinkalteck honeycomb long-material store with profiles in cassettes", { eager: true, cls: "g-main" })}
     ${photo("rack-wall-orange", "Honeycomb storage wall with blue cassettes and orange stacker crane mast")}
@@ -159,10 +163,14 @@ const sheetPage = {
         breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Sheet metal AS/RS", "/products/sheet-metal-asrs/"]]),
       ],
       body: `
+${pageHead({
+  crumbs: [["Home", "/"], ["Products", "/products/"], ["Sheet metal AS/RS", ""]],
+  title: "Vertical storage for sheet metal and plate",
+  lede: "A modular bracket-arm rack with custom pallets stores sheets and plates up to 8 m long and delivers them to your production machines on demand, without stacking damage and in far less floor space.",
+  iconName: "sheet",
+  figures: [["Sheet size", "3–8 m × 1–2 m"], ["Load per position", "Up to 6 t"], ["Storage positions", "50–3,000"]],
+})}
 <div class="wrap narrow page">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Sheet metal AS/RS</span></nav>
-  <h1>Vertical storage for sheet metal and plate</h1>
-  <p class="lede">A modular bracket-arm rack with custom pallets stores sheets and plates up to 8 m long and delivers them to your production machines on demand, without stacking damage and in far less floor space.</p>
   <div class="gallery">
     ${photo("sheet-metal-asrs", "Kinkalteck sheet metal storage tower with loading trolleys", { eager: true, cls: "g-main" })}
     ${photo("sheet-metal-station", "Loading station of a sheet metal store")}
@@ -194,10 +202,15 @@ const overview = {
         "Vertical storage for bars, profiles, tubes, sheet metal, extra-long loads and tooling. Compare Kinkalteck AS/RS systems and request a quote.",
       schema: [breadcrumbSchema([["Home", "/"], ["Products", "/products/"]])],
       body: `
-<div class="wrap narrow page">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Products</span></nav>
-  <h1>Automated storage systems for metal materials</h1>
-  <p class="lede">Choose by what you store. If more than one type suits your materials and building, our engineers compare them for you.</p>
+${pageHead({
+  crumbs: [["Home", "/"], ["Products", ""]],
+  title: "Automated storage systems for metal materials",
+  lede: "Choose by what you store. If more than one type suits your materials and building, our engineers compare them for you.",
+})}
+<div class="wrap page page-lead">
+  ${lengthRuler({ title: "Compare by material length" })}
+</div>
+<div class="wrap narrow page page-follow">
   <div class="table-wrap"><table>
     <thead><tr><th scope="col">System</th><th scope="col">Stores</th><th scope="col">Size and load</th><th scope="col">Positions</th></tr></thead>
     <tbody>
@@ -236,10 +249,14 @@ const cranePage = {
         breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Overhead-crane stacker AS/RS", "/products/overhead-crane-storage/"]]),
       ],
       body: `
+${pageHead({
+  crumbs: [["Home", "/"], ["Products", "/products/"], ["Overhead-crane stacker AS/RS", ""]],
+  title: "Overhead-crane stacker storage for extra-long and heavy loads",
+  lede: "An automated overhead-crane stacker serves cantilever racks for material up to 20 m long and up to 20 t per position. In 2025 it became China's first exported overhead-crane stacker AS/RS with cantilever racks.",
+  iconName: "long-load",
+  figures: [["Material length", "2–20 m"], ["Load per position", "Up to 20 t"], ["Storage positions", "50–3,000"]],
+})}
 <div class="wrap narrow page">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Overhead-crane stacker AS/RS</span></nav>
-  <h1>Overhead-crane stacker storage for extra-long and heavy loads</h1>
-  <p class="lede">An automated overhead-crane stacker serves cantilever racks for material up to 20 m long and up to 20 t per position. In 2025 it became China's first exported overhead-crane stacker AS/RS with cantilever racks.</p>
   <div class="gallery">
     ${photo("crane-store-long", "Overhead-crane stacker serving a cantilever storage rack", { eager: true, cls: "g-main" })}
     ${photo("crane-store-render", "3D view of an overhead-crane stacker storage system with trucks at the loading area")}

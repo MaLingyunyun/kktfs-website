@@ -4,6 +4,59 @@ import { createHash } from "node:crypto";
 
 // Changes whenever styles.css changes, so browsers never use an outdated stylesheet
 const CSS_V = createHash("md5").update(readFileSync(new URL("../public/styles.css", import.meta.url))).digest("hex").slice(0, 8);
+const ICON_V = createHash("md5").update(readFileSync(new URL("./icons.mjs", import.meta.url))).digest("hex").slice(0, 8);
+
+// Decorative line icon from /icons.svg (hidden from screen readers; the text next to it carries the meaning)
+export const icon = (name, cls = "") =>
+  `<svg class="icon${cls ? " " + cls : ""}" aria-hidden="true" focusable="false"><use href="/icons.svg?v=${ICON_V}#${name}"></use></svg>`;
+
+// The four systems by material length. One source for the home-page ruler and the overview page.
+export const SYSTEMS = [
+  { name: "Mini vertical storage", href: "/products/", icon: "tooling", from: 0.2, to: 2, len: "0.2–2 m", load: "up to 2 t", positions: "100–20,000 positions", stores: "Tools, dies and parts" },
+  { name: "Sheet metal AS/RS", href: "/products/sheet-metal-asrs/", icon: "sheet", from: 3, to: 8, len: "3–8 m", load: "up to 6 t", positions: "50–3,000 positions", stores: "Sheets and plates, 1–2 m wide" },
+  { name: "Honeycomb long-material AS/RS", href: "/products/long-material-asrs/", icon: "bar-round", from: 3, to: 12, len: "3–12 m", load: "up to 6 t", positions: "100–3,000 positions", stores: "Bars, profiles, tubes and pipes" },
+  { name: "Overhead-crane stacker AS/RS", href: "/products/overhead-crane-storage/", icon: "long-load", from: 2, to: 20, len: "2–20 m", load: "up to 20 t", positions: "50–3,000 positions", stores: "Extra-long and heavy bars, tubes and profiles" },
+];
+
+// Header band for inner pages: breadcrumb, title, lede and up to three key figures (all real text).
+export const pageHead = ({ crumbs = [], title, lede = "", iconName = "", figures = [] }) => `
+<header class="page-head">
+  <div class="wrap">
+    ${crumbs.length ? `<nav class="crumbs" aria-label="Breadcrumb">${crumbs.map(([label, href], i) => (i < crumbs.length - 1 ? `<a href="${href}">${esc(label)}</a>` : `<span>${esc(label)}</span>`)).join(" / ")}</nav>` : ""}
+    <div class="page-head-grid${figures.length ? "" : " no-figures"}">
+      <div>
+        ${iconName ? icon(iconName, "page-head-icon") : ""}
+        <h1>${esc(title)}</h1>
+        ${lede ? `<p class="lede">${esc(lede)}</p>` : ""}
+      </div>
+      ${figures.length ? `<dl class="key-figures">${figures.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : ""}
+    </div>
+  </div>
+</header>`;
+
+// Material-length ruler: each system drawn as a bar on a 0–20 m scale. All figures are real text.
+export const lengthRuler = ({ title = "Choose by material length", headingLevel = 2 } = {}) => {
+  const ticks = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
+  return `
+<section class="ruler" aria-labelledby="ruler-h">
+  <div class="ruler-head">
+    <h${headingLevel} id="ruler-h">${esc(title)}</h${headingLevel}>
+    <p>Four systems cover material from 0.2 m to 20 m long. Each one is listed with its load per storage position and number of positions.</p>
+  </div>
+  <div class="ruler-body">
+    <div class="ruler-scale" aria-hidden="true">${ticks.map((t) => `<span style="--at:${t}" data-t="${t === 20 ? "20 m" : t}"></span>`).join("")}</div>
+    <ul class="ruler-rows">
+      ${SYSTEMS.map(
+        (sy, i) => `<li style="--from:${sy.from};--to:${sy.to};--i:${i}">
+        <a class="ruler-name" href="${sy.href}">${icon(sy.icon)}<span>${esc(sy.name)}</span></a>
+        <span class="ruler-track"><span class="ruler-bar${sy.to - sy.from >= 8 ? " is-long" : ""}"><span class="ruler-len">${esc(sy.len)}</span></span></span>
+        <span class="ruler-data"><span>${esc(sy.load[0].toUpperCase() + sy.load.slice(1))} per position,</span> <span>${esc(sy.positions)}</span></span>
+      </li>`
+      ).join("")}
+    </ul>
+  </div>
+</section>`;
+};
 
 export const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -144,11 +197,11 @@ ${caption ? `<caption>${esc(caption)}</caption>` : ""}
 export const faqBlock = (faqs) => `
 <section class="faq" aria-labelledby="faq-h">
   <h2 id="faq-h">Questions buyers ask</h2>
-  ${faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}
+  ${faqs.map(([q, a]) => `<details><summary><span>${esc(q)}</span>${icon("plus", "faq-icon")}</summary><p>${esc(a)}</p></details>`).join("")}
 </section>`;
 
 export const ctaBand = (title, text) => `
-<section class="cta-band">
+<section class="cta-band blueprint">
   <div class="wrap cta-inner">
     <div>
       <h2>${esc(title)}</h2>
@@ -228,9 +281,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ""}
 <meta property="og:url" content="${canonical}">
 <meta property="og:site_name" content="${site.name}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500;600&display=swap">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css?v=${CSS_V}">
 ${ld}
 </head>
@@ -261,30 +312,30 @@ ${ld}
 <main id="main">
 ${body}
 </main>
-<footer class="site-footer">
+<footer class="site-footer blueprint">
   <div class="wrap footer-grid">
     <div>
       <img class="footer-logo" src="/img/logo-mark.png" alt="Kinkalteck" width="96" height="37">
       <p class="footer-brand">${esc(site.shortName)}</p>
       <p>Shop-floor material-flow systems for long and heavy materials: automated storage, handling and machine feeding, designed and built in Foshan, China.</p>
-      <p>${esc(site.address.street)}, ${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
+      <p class="footer-addr">${icon("pin")}<span>${esc(site.address.street)}, ${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</span></p>
     </div>
     <div>
       <p class="footer-h">Systems</p>
       <ul>
         <li><a href="/products/long-material-asrs/">Long material AS/RS</a></li>
         <li><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS</a></li>
-        <li><a href="/products/overhead-crane-storage/">Overhead crane storage</a></li>
+        <li><a href="/products/overhead-crane-storage/">Overhead-crane stacker AS/RS</a></li>
         <li><a href="/products/">All systems</a></li>
       </ul>
     </div>
     <div>
       <p class="footer-h">Contact</p>
       <ul>
-        <li><a href="mailto:${c.email}">${c.email}</a></li>
-        ${c.phoneIntl ? `<li><a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></li>` : ""}
-        ${c.whatsapp ? `<li><a href="https://wa.me/${c.whatsapp}">WhatsApp</a></li>` : ""}
-        ${c.wechat ? `<li>WeChat: ${esc(c.wechat)}</li>` : ""}
+        <li>${icon("mail")}<a href="mailto:${c.email}">${c.email}</a></li>
+        ${c.phoneIntl ? `<li>${icon("phone")}<a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></li>` : ""}
+        ${c.whatsapp ? `<li>${icon("chat")}<a href="https://wa.me/${c.whatsapp}">WhatsApp</a></li>` : ""}
+        ${c.wechat ? `<li>${icon("chat")}<span>WeChat: ${esc(c.wechat)}</span></li>` : ""}
         <li><a href="${site.sisterSite.url}" rel="noopener">${esc(site.sisterSite.name)}</a></li>
       </ul>
     </div>
@@ -293,7 +344,7 @@ ${body}
     <p>© ${new Date().getFullYear()} ${esc(site.legalName)}</p>
   </div>
 </footer>
-${c.whatsapp ? `<a class="wa-float" href="https://wa.me/${c.whatsapp}" aria-label="Chat with us on WhatsApp">WhatsApp</a>` : ""}
+${c.whatsapp ? `<a class="wa-float" href="https://wa.me/${c.whatsapp}" aria-label="Chat with us on WhatsApp">${icon("chat")}<span>WhatsApp</span></a>` : ""}
 </body>
 </html>`;
 }

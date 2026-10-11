@@ -6,6 +6,8 @@ import home from "./src/pages/home.mjs";
 import products from "./src/pages/products.mjs";
 import contact from "./src/pages/contact.mjs";
 import insights, { insightPosts } from "./src/pages/insights.mjs";
+import { iconSprite } from "./src/icons.mjs";
+import { blueprintRack } from "./src/blueprint.mjs";
 
 const out = "dist";
 const today = new Date().toISOString().slice(0, 10);
@@ -14,6 +16,9 @@ const pages = [home, ...products, ...contact, ...insights];
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 if (existsSync("public")) cpSync("public", out, { recursive: true });
+// Generated graphics: icon sprite and the blueprint background drawing
+writeFileSync(join(out, "icons.svg"), iconSprite());
+writeFileSync(join(out, "img", "blueprint-rack.svg"), blueprintRack());
 
 for (const p of pages) {
   const file = p.file ? join(out, p.file) : join(out, p.path, "index.html");
@@ -117,6 +122,9 @@ https://:version.:project.pages.dev/*
   Cache-Control: public, max-age=86400
 /*.svg
   Cache-Control: public, max-age=604800
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
 /img/*
   Cache-Control: public, max-age=604800
 /video/*

@@ -3,7 +3,7 @@ import { layout, ctaBand, faqBlock, faqSchema, photo, howItWorksVideo } from "..
 const faqs = [
   [
     "What materials can a Kinkalteck AS/RS store?",
-    "Bars, profiles, tubes and pipes 3 to 12 m long in the honeycomb long-material system; sheets and plates 3 to 8 m long and 1 to 2 m wide in the sheet metal system; long, heavy loads 2 to 20 m long and up to 20 t per position in the overhead-crane stacker system; and tools, dies and parts in the mini system.",
+    "Bars, profiles, tubes and pipes 3 to 12 m long in the honeycomb long-material system; sheets and plates 3 to 8 m long and 1 to 2 m wide in the sheet metal system; long, heavy loads 2 to 20 m long and up to 20 t per position in the overhead-crane stacker system; and tools, dies and parts 0.2 to 2 m long and up to 2 t per position in the mini system.",
   ],
   [
     "How many storage positions can one system have?",
@@ -11,7 +11,7 @@ const faqs = [
   ],
   [
     "How does the storage connect to our machines?",
-    "Kinkalteck's patented embedded design turns the store and the workshop into one area: saws and other production machines are installed right at the store and fed automatically, so no separate warehouse area and no material picker are needed.",
+    "Kinkalteck's patented embedded design turns the store and the workshop into one area: saws and other production machines stand right beside the store and are fed automatically, so no separate warehouse area and no material picker are needed.",
   ],
   [
     "Does the system connect to our ERP?",
@@ -152,7 +152,7 @@ export default {
     ${howItWorksVideo("3D animation: inbound platform, five-axis gantry retrieval robot and automatic feeding to the work station")}
     <div>
       <h2>See it work</h2>
-      <p>A five-axis gantry robot takes cassettes from the honeycomb rack and delivers material straight to the work station. Saws and other machines connect directly to the store, a patented embedded design, so the warehouse and the workshop become one area.</p>
+      <p>A five-axis gantry robot takes cassettes from the honeycomb rack and delivers material straight to the work station. Saws and other machines stand right beside the store, a patented embedded design, so the warehouse and the workshop become one area.</p>
       <ul class="checks">
         <li>Each honeycomb level is about 200 mm lower than in a fork-type AS/RS: 5 levels fit where a stacker-aisle store fits 4, about 20% more storage</li>
         <li>About 90 seconds per retrieval in a 2,000-position system</li>
@@ -197,7 +197,7 @@ export default {
         <a class="btn btn-ghost btn-sm" href="/products/overhead-crane-storage/">Specifications</a>
       </article>
     </div>
-    <p class="more-systems">For tools, dies and parts: <a href="/products/">mini vertical storage</a>, 100–20,000 positions.</p>
+    <p class="more-systems">For tools, dies and parts: <a href="/products/">mini vertical storage</a>, 0.2–2 m, up to 2 t per position, 100–20,000 positions.</p>
   </div>
 </section>
 
@@ -255,14 +255,14 @@ export default {
       <p>Kinkalteck works on the production floors of plants that handle long and heavy material. We combine process experience, material-flow planning and purpose-built equipment into systems that work in practice, so material supply, process flow and order delivery stay under control.</p>
       <h3>Why customers choose Kinkalteck</h3>
       <ul class="checks">
-        <li>Storage and workshop in one area, with machines installed at the store (patented)</li>
+        <li>Storage and workshop in one area, with machines right beside the store (patented)</li>
         <li>Automatic feeding to the machines, no material picker (patented)</li>
         <li>Lower levels: about 20% more storage in the same height</li>
         <li>Our own WMS and WCS, adapted to your process on request</li>
         <li>Lower cost than European-built systems</li>
         <li>Short delivery times</li>
       </ul>
-      <p>A team of about 50 in Foshan, China, designs the hardware and software in-house. Certified to ISO 9001 and IATF 16949.</p>
+      <p>A team of about 50 in Foshan, China, designs the hardware and software in-house. Certified to ISO 9001.</p>
     </div>
     <div>
       <h2>Milestones</h2>

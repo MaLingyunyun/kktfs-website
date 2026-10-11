@@ -4,7 +4,8 @@
 export const site = {
   url: "https://www.kktfs.com",
   name: "Kinkalteck",
-  legalName: "Kinkalteck Foshan",
+  shortName: "Kinkalteck Foshan", // shown on the site
+  legalName: "Kinkalteck Machinery Technology Co., Ltd.", // full legal name: schema, copyright, factory address
   tagline: "Shop-floor material-flow solutions for long and heavy materials",
   founded: "2018",
   address: {

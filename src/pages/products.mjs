@@ -102,7 +102,7 @@ const longPage = {
 <div class="wrap narrow page">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Long material AS/RS</span></nav>
   <h1>Honeycomb vertical storage for bars, profiles and tubes</h1>
-  <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Saws and other machines are installed at the store, a patented embedded design, so storage and production share one area.</p>
+  <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Saws and other machines stand right beside the store, a patented embedded design, so storage and production share one area.</p>
   <div class="gallery">
     ${photo("aisle-steel", "Aisle of a Kinkalteck honeycomb long-material store with profiles in cassettes", { eager: true, cls: "g-main" })}
     ${photo("rack-wall-orange", "Honeycomb storage wall with blue cassettes and orange stacker crane mast")}
@@ -113,7 +113,7 @@ const longPage = {
   <h2>What makes it different</h2>
   <ul>
     <li><strong>About 20% more storage in the same height.</strong> Each level is about 200 mm lower than in a fork-type AS/RS, so 5 honeycomb levels fit where a stacker-aisle store fits 4.</li>
-    <li><strong>Storage and workshop in one area.</strong> The patented embedded design installs machines at the store, with no separate warehouse area.</li>
+    <li><strong>Storage and workshop in one area.</strong> The patented embedded design puts your machines right beside the store, with no separate warehouse area.</li>
     <li><strong>Automatic feeding, no material picker.</strong> Patented picking and feeding delivers material to the machine, first in, first out.</li>
     <li><strong>Fast returns.</strong> Part-used bundles go back into storage instead of piling up beside the saw.</li>
   </ul>
@@ -204,7 +204,7 @@ const overview = {
       <tr><td><a href="/products/long-material-asrs/">Long material AS/RS (honeycomb)</a></td><td>Bars, profiles, tubes, pipes</td><td>3–12 m, up to 6 t per position</td><td>100–3,000</td></tr>
       <tr><td><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS (bracket-arm)</a></td><td>Sheets and plates</td><td>3–8 m × 1–2 m, up to 6 t per position</td><td>50–3,000</td></tr>
       <tr><td><a href="/products/overhead-crane-storage/">Overhead-crane stacker AS/RS (cantilever)</a></td><td>Extra-long and heavy bars, tubes and profiles</td><td>2–20 m, up to 20 t per position</td><td>50–3,000</td></tr>
-      <tr><td>Mini vertical storage</td><td>Tools, dies, moulds and parts</td><td>Small loads</td><td>100–20,000</td></tr>
+      <tr><td>Mini vertical storage</td><td>Tools, dies, moulds and parts</td><td>0.2–2 m, up to 2 t per position</td><td>100–20,000</td></tr>
     </tbody>
   </table></div>
   <h2>Which system fits?</h2>

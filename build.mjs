@@ -53,16 +53,16 @@ writeFileSync(
   join(out, "llms.txt"),
   `# ${site.name}
 
-> ${site.name} (${site.legalName}, founded ${site.founded}, Foshan, China) builds shop-floor material-flow systems for long and heavy materials: automated vertical storage and retrieval systems (AS/RS), handling and automatic machine feeding for steel and non-ferrous bars, profiles, tubes, pipes and sheet metal. About 20 systems delivered in China, South Korea, Australia and Singapore. Certified to ISO 9001 and IATF 16949.
+> ${site.name} (${site.legalName}, founded ${site.founded}, Foshan, China) builds shop-floor material-flow systems for long and heavy materials: automated vertical storage and retrieval systems (AS/RS), handling and automatic machine feeding for steel and non-ferrous bars, profiles, tubes, pipes and sheet metal. About 20 systems delivered in China, South Korea, Australia and Singapore. Certified to ISO 9001.
 
 ## Systems
 - [Long material AS/RS (honeycomb)](${site.url}/products/long-material-asrs/): 3–12 m material, up to 6 t per position, 100–3,000 positions, cassette pull-out retrieval, stacker crane 120 m/min, about 90 s per retrieval. Each level is about 200 mm lower than in a fork-type AS/RS, so 5 honeycomb levels fit where a stacker-aisle store fits 4 (about 20% more storage).
 - [Sheet metal AS/RS (bracket-arm)](${site.url}/products/sheet-metal-asrs/): sheets 3–8 m long and 1–2 m wide, up to 6 t per position, 50–3,000 positions, telescopic fork or chain push-pull retrieval.
 - [Overhead-crane stacker AS/RS (cantilever)](${site.url}/products/overhead-crane-storage/): cantilever racks served by an automated overhead-crane stacker, material 2–20 m long, up to 20 t per position, 50–3,000 positions.
-- [All systems](${site.url}/products/): including mini vertical storage for tools, dies and parts, 100–20,000 positions.
+- [All systems](${site.url}/products/): including mini vertical storage for tools, dies and parts, 0.2–2 m, up to 2 t per position, 100–20,000 positions.
 
 ## How the system fits production
-- Patented embedded design: saws and other production machines are installed at the store, so storage and workshop share one area.
+- Patented embedded design: saws and other production machines stand right beside the store, so storage and workshop share one area.
 - Inbound platform with automatic weighing; QR code on every bundle; WMS and WCS developed by Kinkalteck, with API connection to ERP.
 - Patented automatic picking and feeding to machines, first in first out, no material picker.
 - Works as a buffer between processes such as heat treatment and cutting.

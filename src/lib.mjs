@@ -265,7 +265,7 @@ ${body}
   <div class="wrap footer-grid">
     <div>
       <img class="footer-logo" src="/img/logo-mark.png" alt="Kinkalteck" width="96" height="37">
-      <p class="footer-brand">${esc(site.legalName)}</p>
+      <p class="footer-brand">${esc(site.shortName)}</p>
       <p>Shop-floor material-flow systems for long and heavy materials: automated storage, handling and machine feeding, designed and built in Foshan, China.</p>
       <p>${esc(site.address.street)}, ${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
     </div>

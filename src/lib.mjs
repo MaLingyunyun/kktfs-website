@@ -95,8 +95,11 @@ export const orgSchema = () => ({
   logo: abs("/img/logo-mark.png"),
   foundingDate: site.founded,
   description:
-    "Kinkalteck designs and builds automated vertical storage and retrieval systems (AS/RS) for long and heavy materials: steel bars, profiles, tubes and sheet metal.",
+    "Kinkalteck designs and builds shop-floor material-flow systems for long and heavy materials: automated storage and retrieval systems (AS/RS) for steel bars, profiles, tubes, pipes and sheet metal, with automatic weighing, conveying and machine feeding.",
   email: site.contact.email,
+  telephone: site.contact.phoneIntl || undefined,
+  numberOfEmployees: { "@type": "QuantitativeValue", value: 50 },
+  areaServed: ["CN", "KR", "AU", "SG", "Southeast Asia"],
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
@@ -152,7 +155,7 @@ export const ctaBand = (title, text) => `
       <p>${esc(text)}</p>
     </div>
     <div class="cta-actions">
-      <a class="btn btn-primary" href="/contact/">Get a budget price</a>
+      <a class="btn btn-primary" href="/contact/">Request a quote</a>
       ${site.contact.whatsapp ? `<a class="btn btn-ghost" href="https://wa.me/${site.contact.whatsapp}">Chat on WhatsApp</a>` : ""}
     </div>
   </div>
@@ -201,7 +204,6 @@ export function layout({ title, description, path, body, schema = [], ogType = "
     ["/products/long-material-asrs/", "Long material"],
     ["/products/sheet-metal-asrs/", "Sheet metal"],
     ["/products/", "All systems"],
-    ["/insights/", "Guides"],
     ["/contact/", "Contact"],
   ];
   const navHtml = nav
@@ -236,7 +238,7 @@ ${ld}
 <a class="skip" href="#main">Skip to content</a>
 <div class="utility">
   <div class="wrap utility-inner">
-    <span>Automated storage for long and heavy materials, made in Foshan since ${site.founded}</span>
+    <span>Material-flow systems for long and heavy materials, made in Foshan, China</span>
     <span class="utility-links">
       <a href="/#singapore">Singapore project</a>
       <a href="mailto:${site.contact.email}">${site.contact.email}</a>
@@ -249,10 +251,10 @@ ${ld}
       <img src="/img/logo-mark.png" alt="Kinkalteck" width="110" height="42">
     </a>
     <nav class="main-nav" aria-label="Main">${navHtml}</nav>
-    <a class="btn btn-primary btn-sm header-cta" href="/contact/">Get a budget price</a>
+    <a class="btn btn-primary btn-sm header-cta" href="/contact/">Request a quote</a>
     <details class="mobile-menu">
       <summary aria-label="Open menu">Menu</summary>
-      <nav aria-label="Mobile">${navHtml}<a class="btn btn-primary" href="/contact/">Get a budget price</a></nav>
+      <nav aria-label="Mobile">${navHtml}<a class="btn btn-primary" href="/contact/">Request a quote</a></nav>
     </details>
   </div>
 </header>
@@ -264,7 +266,7 @@ ${body}
     <div>
       <img class="footer-logo" src="/img/logo-mark.png" alt="Kinkalteck" width="96" height="37">
       <p class="footer-brand">${esc(site.legalName)}</p>
-      <p>Automated vertical storage for long and heavy materials, designed and built in Foshan, China, since ${site.founded}.</p>
+      <p>Shop-floor material-flow systems for long and heavy materials: automated storage, handling and machine feeding, designed and built in Foshan, China.</p>
       <p>${esc(site.address.street)}, ${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
     </div>
     <div>
@@ -282,6 +284,7 @@ ${body}
         <li><a href="mailto:${c.email}">${c.email}</a></li>
         ${c.phoneIntl ? `<li><a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></li>` : ""}
         ${c.whatsapp ? `<li><a href="https://wa.me/${c.whatsapp}">WhatsApp</a></li>` : ""}
+        ${c.wechat ? `<li>WeChat: ${esc(c.wechat)}</li>` : ""}
         <li><a href="${site.sisterSite.url}" rel="noopener">${esc(site.sisterSite.name)}</a></li>
       </ul>
     </div>

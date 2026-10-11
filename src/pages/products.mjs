@@ -1,60 +1,81 @@
-import { heroElevation } from "../drawings.mjs";
 import { layout, photo, howItWorksVideo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema } from "../lib.mjs";
 
 const longSpecs = [
-  ["Material", "Steel and aluminium bars, profiles, tubes and pipes"],
+  ["Material", "Steel and non-ferrous bars, profiles, tubes and pipes"],
   ["Material length", "3–12 m"],
   ["Load per storage position", "Up to 6 t"],
   ["Position height and width", "Made to fit your bundle size"],
-  ["Number of positions", "100–9,999"],
+  ["Number of positions", "100–3,000"],
   ["Retrieval method", "Cassette (pallet) pull-out"],
   ["Stacker crane travel speed", "120 m/min"],
   ["Stacker crane acceleration", "0.5 m/s²"],
   ["Retrieval cycle", "About 90 s (2,000-position system)"],
   ["Rack", "Modular, quick to install, extendable"],
-  ["Typical floor load requirement", "10 t/m²"],
+  ["Software", "Kinkalteck WMS and WCS, API connection to your ERP"],
 ];
 
 const sheetSpecs = [
   ["Material", "Steel and aluminium sheets and plates"],
-  ["Material length", "3–12 m"],
+  ["Material length", "3–8 m"],
   ["Material width", "1–2 m"],
   ["Load per storage position", "Up to 6 t"],
-  ["Number of positions", "50–9,999"],
+  ["Number of positions", "50–3,000"],
   ["Retrieval method", "Telescopic fork or chain push-pull"],
   ["Stacker crane travel speed", "120 m/min"],
   ["Stacker crane acceleration", "0.5 m/s²"],
   ["Retrieval cycle", "About 90 s (1,000-position system)"],
-  ["Rack", "Modular cantilever rack with custom pallets"],
+  ["Rack", "Modular bracket-arm rack with custom pallets"],
+  ["Software", "Kinkalteck WMS and WCS, API connection to your ERP"],
+];
+
+const craneSpecs = [
+  ["Material", "Extra-long and heavy bars, tubes, pipes and profiles"],
+  ["Material length", "2–20 m"],
+  ["Load per storage position", "Up to 20 t"],
+  ["Number of positions", "50–3,000"],
+  ["Handling", "Automated overhead-crane stacker"],
+  ["Rack", "Cantilever rack"],
+  ["Software", "Kinkalteck WMS and WCS, API connection to your ERP"],
 ];
 
 const longFaqs = [
   [
-    "How wide does my building need to be?",
-    "For a honeycomb system with two rack rows sharing one aisle, plan for a clear width of about 3 to 3.5 times your longest material. For 6 m material, that means at least about 19 m.",
+    "Why are the levels lower than in other AS/RS?",
+    "Each honeycomb level is about 200 mm lower than in a fork-type AS/RS. Five honeycomb levels fit where a stacker-aisle store fits four, about 20% more storage in the same building height.",
   ],
   [
-    "Do I need cassettes?",
-    "Yes. Every position in a honeycomb system holds a cassette, which protects the material and lets the stacker crane pull it out. Cassettes are sized to your bundles with about 200 mm clearance.",
-  ],
-  [
-    "What floor load is needed?",
-    "A standard floor rated for 10 t/m² suits most systems. Very tall stores may need a reinforced foundation, which we check during planning.",
+    "Does every position need a cassette?",
+    "Yes. Every position in a honeycomb system holds a cassette sized to your bundles. The cassette protects the material and lets the stacker crane pull it out.",
   ],
   [
     "Can the system connect to our ERP?",
-    "Yes. The warehouse software tracks every bundle by position in real time and can exchange stock and order data with your ERP or MES.",
+    "Yes. Our WMS tracks every bundle by QR code and position in real time and exchanges stock and order data with your ERP through an API. We develop the software ourselves and adapt it to your process.",
+  ],
+  [
+    "How do I get a quote?",
+    "Send your longest material length, bundle size and weight, how many bundles you store and your building dimensions. Our team replies within one working day.",
   ],
 ];
 
 const sheetFaqs = [
   [
-    "What is the difference from a standard sheet metal tower?",
-    "Kinkalteck's cantilever system uses a lower level pitch than conventional AS/RS, so more storage levels fit into the same building height, and it handles sheets and plates up to 12 m long.",
+    "What sizes of sheet can it store?",
+    "Sheets and plates 3 to 8 m long and 1 to 2 m wide, up to 6 t per position, in 50 to 3,000 positions.",
   ],
   [
     "Which retrieval method should I choose?",
     "Both telescopic fork and chain push-pull retrieval are available. We recommend one after reviewing your sheet sizes, weights and throughput.",
+  ],
+];
+
+const craneFaqs = [
+  [
+    "When is an overhead-crane stacker the right choice?",
+    "For material that is longer or heavier than a honeycomb system handles: up to 20 m long and up to 20 t per position. We recommend a system type after reviewing your materials and building.",
+  ],
+  [
+    "Does it use the same software as your other systems?",
+    "Yes. QR-coded bundles, our WMS and WCS, and an API connection to your ERP, as in every Kinkalteck system.",
   ],
 ];
 
@@ -65,7 +86,7 @@ const longPage = {
       path: "/products/long-material-asrs/",
       title: "Long Material Vertical Storage System (AS/RS) | Kinkalteck",
       description:
-        "Honeycomb vertical storage for bars, profiles and tubes 3–12 m long, up to 6 t per position. Machines below, material above. Get a layout study.",
+        "Honeycomb vertical storage for bars, profiles and tubes 3–12 m long, up to 6 t per position, 100–3,000 positions, with automatic feeding to your machines.",
       schema: [
         productSchema({
           name: "Kinkalteck honeycomb long material AS/RS",
@@ -81,7 +102,7 @@ const longPage = {
 <div class="wrap narrow page">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Long material AS/RS</span></nav>
   <h1>Honeycomb vertical storage for bars, profiles and tubes</h1>
-  <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Your production machines can stand on the ground floor with material stored directly above them, a patented layout that removes unnecessary handling.</p>
+  <p class="lede">Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Saws and other machines are installed at the store, a patented embedded design, so storage and production share one area.</p>
   <div class="gallery">
     ${photo("aisle-steel", "Aisle of a Kinkalteck honeycomb long-material store with profiles in cassettes", { eager: true, cls: "g-main" })}
     ${photo("rack-wall-orange", "Honeycomb storage wall with blue cassettes and orange stacker crane mast")}
@@ -89,34 +110,31 @@ const longPage = {
   </div>
   <h2>Specifications</h2>
   ${specTable(longSpecs)}
-  <h2>Machines below, material above</h2>
-  <figure class="embed-figure">${heroElevation()}</figure>
   <h2>What makes it different</h2>
   <ul>
-    <li><strong>More levels in the same height.</strong> A lower level pitch than standard AS/RS fits more storage levels into your building.</li>
-    <li><strong>Machines underneath.</strong> The patented embedded layout puts storage and production in one footprint.</li>
-    <li><strong>Storage, buffer and machine feeding in one system.</strong> Every bundle has a known position, and stock updates in real time.</li>
-    <li><strong>Fast returns.</strong> Part-used bundles go back into storage quickly, instead of piling up beside the saw.</li>
+    <li><strong>About 20% more storage in the same height.</strong> Each level is about 200 mm lower than in a fork-type AS/RS, so 5 honeycomb levels fit where a stacker-aisle store fits 4.</li>
+    <li><strong>Storage and workshop in one area.</strong> The patented embedded design installs machines at the store, with no separate warehouse area.</li>
+    <li><strong>Automatic feeding, no material picker.</strong> Patented picking and feeding delivers material to the machine, first in, first out.</li>
+    <li><strong>Fast returns.</strong> Part-used bundles go back into storage instead of piling up beside the saw.</li>
   </ul>
   <h2>Built into your production flow</h2>
   <ul>
     <li><strong>Automatic weighing</strong> as bundles enter storage from the inbound platform.</li>
-    <li><strong>QR code on every bundle</strong>, with WMS and WCS software and an API connection to your ERP.</li>
-    <li><strong>Patented automatic picking and feeding</strong> delivers material to the machine first in, first out, with no material picker.</li>
+    <li><strong>QR code on every bundle</strong>, with our own WMS and WCS and an API connection to your ERP.</li>
     <li><strong>A buffer between processes</strong>: material comes back after heat treatment or cutting instead of going onto the floor.</li>
   </ul>
   <h2>See it work</h2>
   ${howItWorksVideo("3D animation: inbound platform, five-axis gantry retrieval robot and automatic feeding to the work station")}
-  <h2>What we need to size your system</h2>
+  <h2>What we need for your quote</h2>
   <ol>
     <li>Longest material length and the bundle width, height and weight</li>
     <li>How many bundles or product types you store</li>
-    <li>Building clear width, length and height, and column spacing</li>
+    <li>Your building's width, length and height</li>
     <li>Which machines the system should feed</li>
   </ol>
   ${faqBlock(longFaqs)}
 </div>
-${ctaBand("Get a layout for your building", "Send your longest bar length, bundle size and building width. We'll send a layout and a budget price.")}
+${ctaBand("Request a quote for your building", "Send your material list and floor plan. Our team replies within one working day.")}
 `,
     }),
 };
@@ -128,12 +146,12 @@ const sheetPage = {
       path: "/products/sheet-metal-asrs/",
       title: "Sheet Metal Vertical Storage System (AS/RS) | Kinkalteck",
       description:
-        "Cantilever vertical storage for sheets and plates 3–12 m long and 1–2 m wide, up to 6 t per position. Protects sheets and saves floor space.",
+        "Bracket-arm vertical storage for sheets and plates 3–8 m long and 1–2 m wide, up to 6 t per position, 50–3,000 positions. Protects sheets and saves floor space.",
       schema: [
         productSchema({
-          name: "Kinkalteck cantilever sheet metal AS/RS",
+          name: "Kinkalteck sheet metal AS/RS",
           description:
-            "Automated cantilever vertical storage and retrieval system for sheets and plates 3–12 m long and 1–2 m wide, up to 6 t per storage position.",
+            "Automated bracket-arm vertical storage and retrieval system for sheets and plates 3–8 m long and 1–2 m wide, up to 6 t per storage position.",
           path: "/products/sheet-metal-asrs/",
           specs: sheetSpecs,
         }),
@@ -143,25 +161,25 @@ const sheetPage = {
       body: `
 <div class="wrap narrow page">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Sheet metal AS/RS</span></nav>
-  <h1>Cantilever vertical storage for sheet metal and plate</h1>
-  <p class="lede">A modular cantilever rack with custom pallets stores sheets and plates up to 12 m long and delivers them to your production machines on demand. No more stacking damage, and far less floor space.</p>
+  <h1>Vertical storage for sheet metal and plate</h1>
+  <p class="lede">A modular bracket-arm rack with custom pallets stores sheets and plates up to 8 m long and delivers them to your production machines on demand, without stacking damage and in far less floor space.</p>
   <div class="gallery">
-    ${photo("sheet-metal-asrs", "Kinkalteck cantilever sheet metal storage tower with loading trolleys", { eager: true, cls: "g-main" })}
-    ${photo("sheet-metal-station", "Loading station of a cantilever sheet metal store")}
-    ${photo("sheet-metal-install", "Cantilever sheet metal storage installed in a factory")}
+    ${photo("sheet-metal-asrs", "Kinkalteck sheet metal storage tower with loading trolleys", { eager: true, cls: "g-main" })}
+    ${photo("sheet-metal-station", "Loading station of a sheet metal store")}
+    ${photo("sheet-metal-install", "Sheet metal storage installed in a factory")}
   </div>
   <h2>Specifications</h2>
   ${specTable(sheetSpecs)}
   <h2>What makes it different</h2>
   <ul>
-    <li><strong>More levels in the same height.</strong> A lower level pitch than conventional AS/RS fits more storage into your building.</li>
     <li><strong>Sheets stay flat and clean.</strong> Each load sits on its own custom pallet instead of in a stack.</li>
     <li><strong>Storage next to production.</strong> Fewer handling moves between the store and your cutting and forming machines.</li>
+    <li><strong>Our own software.</strong> WMS and WCS developed in-house and adapted to your process on request.</li>
     <li><strong>Quick to install.</strong> A modular rack that goes up fast and grows with you.</li>
   </ul>
   ${faqBlock(sheetFaqs)}
 </div>
-${ctaBand("Get a layout for your sheet store", "Send your sheet sizes, weights and quantities. We'll send a layout and a budget price.")}
+${ctaBand("Request a quote for your sheet store", "Send your sheet sizes, weights and quantities. Our team replies within one working day.")}
 `,
     }),
 };
@@ -173,94 +191,73 @@ const overview = {
       path: "/products/",
       title: "Automated Storage Systems for Metal Materials | Kinkalteck",
       description:
-        "Vertical storage for long profiles, bars, tubes, sheet metal and tooling. Compare Kinkalteck AS/RS systems and request a budget price.",
+        "Vertical storage for bars, profiles, tubes, sheet metal, extra-long loads and tooling. Compare Kinkalteck AS/RS systems and request a quote.",
       schema: [breadcrumbSchema([["Home", "/"], ["Products", "/products/"]])],
       body: `
 <div class="wrap narrow page">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Products</span></nav>
   <h1>Automated storage systems for metal materials</h1>
-  <p class="lede">Choose by what you store and how much space you have. If your building suits more than one type, we compare the number of positions and the cost for you.</p>
+  <p class="lede">Choose by what you store. If more than one type suits your materials and building, our engineers compare them for you.</p>
   <div class="table-wrap"><table>
     <thead><tr><th scope="col">System</th><th scope="col">Stores</th><th scope="col">Size and load</th><th scope="col">Positions</th></tr></thead>
     <tbody>
-      <tr><td><a href="/products/long-material-asrs/">Long material AS/RS (honeycomb)</a></td><td>Bars, profiles, tubes, pipes</td><td>3–12 m, up to 6 t per position</td><td>100–9,999</td></tr>
-      <tr><td><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS (cantilever)</a></td><td>Sheets and plates</td><td>3–12 m × 1–2 m, up to 6 t per position</td><td>50–9,999</td></tr>
-      <tr><td><a href="/products/overhead-crane-storage/">Overhead crane storage</a></td><td>Large long bundles, usually without cassettes</td><td>Ask us</td><td>About a third more positions than honeycomb in the same space</td></tr>
-      <tr><td>Mini vertical storage</td><td>Tools, dies, moulds, MRO parts</td><td>Ask us</td><td>Ask us</td></tr>
+      <tr><td><a href="/products/long-material-asrs/">Long material AS/RS (honeycomb)</a></td><td>Bars, profiles, tubes, pipes</td><td>3–12 m, up to 6 t per position</td><td>100–3,000</td></tr>
+      <tr><td><a href="/products/sheet-metal-asrs/">Sheet metal AS/RS (bracket-arm)</a></td><td>Sheets and plates</td><td>3–8 m × 1–2 m, up to 6 t per position</td><td>50–3,000</td></tr>
+      <tr><td><a href="/products/overhead-crane-storage/">Overhead-crane stacker AS/RS (cantilever)</a></td><td>Extra-long and heavy bars, tubes and profiles</td><td>2–20 m, up to 20 t per position</td><td>50–3,000</td></tr>
+      <tr><td>Mini vertical storage</td><td>Tools, dies, moulds and parts</td><td>Small loads</td><td>100–20,000</td></tr>
     </tbody>
   </table></div>
-  <h2>Honeycomb or overhead crane storage?</h2>
-  <p>Space decides first. Where the building suits both, overhead crane storage usually fits more positions into the same space and costs less per position, because most material doesn't need a cassette. Honeycomb storage keeps every bundle in its own cassette and can sit directly above your machines.</p>
+  <h2>Which system fits?</h2>
+  <p>Bars, tubes and profiles up to 12 m and 6 t go into honeycomb storage, with every bundle in its own cassette and automatic feeding to your machines. Longer or heavier material, up to 20 m and 20 t, goes onto cantilever racks served by an overhead-crane stacker. Sheets and plates go onto bracket-arm racks with custom pallets.</p>
+  <p>Every system runs on the same Kinkalteck WMS and WCS, with a QR code on every bundle and an API connection to your ERP.</p>
 </div>
-${ctaBand("Not sure which system fits?", "Send your material list and floor plan, and we'll recommend a system type with a budget price.")}
+${ctaBand("Not sure which system fits?", "Send your material list and floor plan. Our team replies within one working day.")}
 `,
     }),
 };
-
-
-const craneSpecs = [
-  ["Material", "Long bundles of bars, profiles and tubes"],
-  ["Cassettes", "Usually not required"],
-  ["Positions in the same space", "About 200, where honeycomb storage fits about 150"],
-  ["Position size", "Material + 700 mm length, + 100 mm width, + 100 mm height"],
-  ["Crane height allowance", "About 1,500 mm above the top level"],
-  ["First storage level", "About 1,000 mm above the floor"],
-  ["Typical floor load requirement", "10 t/m²"],
-];
-
-const craneFaqs = [
-  [
-    "When is overhead crane storage the better choice?",
-    "When the building has the height for the crane and you want the most positions and the lowest cost per position. Space decides first; when the building suits both types, we compare positions and cost for you.",
-  ],
-  [
-    "Do I need cassettes?",
-    "Usually not. Most bundles are stored directly in the rack, which saves the cost and weight of cassettes. Honeycomb storage, by contrast, needs a cassette in every position.",
-  ],
-];
 
 const cranePage = {
   path: "/products/overhead-crane-storage/",
   render: () =>
     layout({
       path: "/products/overhead-crane-storage/",
-      title: "Overhead Crane Vertical Storage for Long Bundles | Kinkalteck",
+      title: "Overhead-Crane Stacker AS/RS with Cantilever Racks | Kinkalteck",
       description:
-        "Crane-served vertical storage for long bundles, usually without cassettes. About a third more positions than honeycomb storage in the same space.",
+        "Automated cantilever storage served by an overhead-crane stacker, for material 2–20 m long and up to 20 t per position, 50–3,000 positions.",
       schema: [
         productSchema({
-          name: "Kinkalteck overhead crane vertical storage",
+          name: "Kinkalteck overhead-crane stacker AS/RS with cantilever racks",
           description:
-            "Automated overhead-crane vertical storage for long bundles of bars, profiles and tubes, usually without cassettes.",
+            "Automated cantilever storage and retrieval system served by an overhead-crane stacker, for material 2–20 m long and up to 20 t per storage position.",
           path: "/products/overhead-crane-storage/",
           specs: craneSpecs,
         }),
         faqSchema(craneFaqs),
-        breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Overhead crane storage", "/products/overhead-crane-storage/"]]),
+        breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Overhead-crane stacker AS/RS", "/products/overhead-crane-storage/"]]),
       ],
       body: `
 <div class="wrap narrow page">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Overhead crane storage</span></nav>
-  <h1>Overhead crane vertical storage for long bundles</h1>
-  <p class="lede">An automated overhead crane serves tall racks of long material. Most bundles are stored without cassettes, so the same space holds more positions at a lower cost per position.</p>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/products/">Products</a> / <span>Overhead-crane stacker AS/RS</span></nav>
+  <h1>Overhead-crane stacker storage for extra-long and heavy loads</h1>
+  <p class="lede">An automated overhead-crane stacker serves cantilever racks for material up to 20 m long and up to 20 t per position. In 2025 it became China's first exported overhead-crane stacker AS/RS with cantilever racks.</p>
   <div class="gallery">
-    ${photo("crane-store-long", "Overhead crane serving a long-material storage rack", { eager: true, cls: "g-main" })}
-    ${photo("crane-store-render", "3D view of an overhead crane storage system with trucks at the loading area")}
-    ${photo("crane-store-install", "Overhead crane storage during installation")}
+    ${photo("crane-store-long", "Overhead-crane stacker serving a cantilever storage rack", { eager: true, cls: "g-main" })}
+    ${photo("crane-store-render", "3D view of an overhead-crane stacker storage system with trucks at the loading area")}
+    ${photo("crane-store-install", "Overhead-crane stacker storage during installation")}
   </div>
   <h2>Specifications</h2>
   ${specTable(craneSpecs)}
   <p class="fine">Load, length and number of positions are set for each project. Send your material list for a full specification.</p>
   <h2>What makes it different</h2>
   <ul>
-    <li><strong>More positions per square metre.</strong> In the same space, about 200 positions instead of about 150 with honeycomb storage.</li>
-    <li><strong>No cassettes for most loads.</strong> Lower system cost and less dead weight.</li>
-    <li><strong>Lower cost per position.</strong> A strong fit for large stocks of similar bundles.</li>
+    <li><strong>Long and heavy loads.</strong> Up to 20 m and 20 t per position, beyond what a honeycomb store handles.</li>
+    <li><strong>Automated handling.</strong> The crane stacker stores and retrieves bundles without a crane operator.</li>
     <li><strong>Same software.</strong> QR-coded bundles, WMS, WCS and ERP connection, as in every Kinkalteck system.</li>
+    <li><strong>In use.</strong> Running at a precision valve maker in China.</li>
   </ul>
   ${faqBlock(craneFaqs)}
 </div>
-${ctaBand("Compare crane and honeycomb storage for your building", "Send your floor plan and material list. We'll compare positions and cost for both types.")}
+${ctaBand("Request a quote for long and heavy loads", "Send your floor plan and material list. Our team replies within one working day.")}
 `,
     }),
 };

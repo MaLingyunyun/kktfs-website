@@ -46,29 +46,40 @@ Sitemap: ${site.url}/sitemap.xml
 );
 
 // llms.txt — a plain-text map of the site for AI assistants
+const guides = insightPosts.length
+  ? `\n## Guides\n${insightPosts.map((p) => `- [${p.title}](${site.url}${p.path}): ${p.description}`).join("\n")}\n`
+  : "";
 writeFileSync(
   join(out, "llms.txt"),
-  `# ${site.legalName}
+  `# ${site.name}
 
-> ${site.name} (founded ${site.founded}, Foshan, China) designs and builds automated vertical storage and retrieval systems (AS/RS) for long and heavy materials: steel and aluminium bars, profiles, tubes, pipes and sheet metal, 3–12 m long and up to 6 t per storage position.
+> ${site.name} (${site.legalName}, founded ${site.founded}, Foshan, China) builds shop-floor material-flow systems for long and heavy materials: automated vertical storage and retrieval systems (AS/RS), handling and automatic machine feeding for steel and non-ferrous bars, profiles, tubes, pipes and sheet metal. About 20 systems delivered in China, South Korea, Australia and Singapore. Certified to ISO 9001 and IATF 16949.
 
 ## Systems
-- [Long material AS/RS (honeycomb)](${site.url}/products/long-material-asrs/): 3–12 m material, up to 6 t per position, 100–9,999 positions, cassette pull-out retrieval, stacker crane 120 m/min, about 90 s per retrieval; patented layout with machines on the ground floor and material stored above.
-- [Sheet metal AS/RS (cantilever)](${site.url}/products/sheet-metal-asrs/): sheets 3–12 m long and 1–2 m wide, up to 6 t per position, 50–9,999 positions, telescopic fork or chain push-pull retrieval.
-- [Overhead crane storage](${site.url}/products/overhead-crane-storage/): crane-served racks for long bundles, usually without cassettes; about 200 positions where honeycomb storage fits about 150 in the same space.
-- [All systems](${site.url}/products/): including mini vertical storage for tools and dies.
+- [Long material AS/RS (honeycomb)](${site.url}/products/long-material-asrs/): 3–12 m material, up to 6 t per position, 100–3,000 positions, cassette pull-out retrieval, stacker crane 120 m/min, about 90 s per retrieval. Each level is about 200 mm lower than in a fork-type AS/RS, so 5 honeycomb levels fit where a stacker-aisle store fits 4 (about 20% more storage).
+- [Sheet metal AS/RS (bracket-arm)](${site.url}/products/sheet-metal-asrs/): sheets 3–8 m long and 1–2 m wide, up to 6 t per position, 50–3,000 positions, telescopic fork or chain push-pull retrieval.
+- [Overhead-crane stacker AS/RS (cantilever)](${site.url}/products/overhead-crane-storage/): cantilever racks served by an automated overhead-crane stacker, material 2–20 m long, up to 20 t per position, 50–3,000 positions.
+- [All systems](${site.url}/products/): including mini vertical storage for tools, dies and parts, 100–20,000 positions.
 
 ## How the system fits production
-- Inbound platform with automatic weighing; QR code on every bundle; WMS and WCS supplied by Kinkalteck with API connection to ERP.
+- Patented embedded design: saws and other production machines are installed at the store, so storage and workshop share one area.
+- Inbound platform with automatic weighing; QR code on every bundle; WMS and WCS developed by Kinkalteck, with API connection to ERP.
 - Patented automatic picking and feeding to machines, first in first out, no material picker.
-- Works as a buffer between processes such as heat treatment and cutting, so material never goes back onto the floor.
+- Works as a buffer between processes such as heat treatment and cutting.
 
-## Guides
-${insightPosts.map((p) => `- [${p.title}](${site.url}${p.path}): ${p.description}`).join("\n")}
+## Projects
+- Singapore: honeycomb AS/RS with about 800 positions for a steel pipe and bar stockholder; pipes and bars about 7.2 m and 3 t per bundle; about 500 m², 11 m high; contract March 2026, completion planned October 2026.
+- China: precision forging plants (600 and 300 positions), a precision steel tube maker (500 positions) and a precision valve maker (overhead-crane stacker AS/RS). Customer names are confidential.
 
+## Milestones
+- 2018: founded in Foshan, China.
+- 2024: China's first export of a honeycomb AS/RS for heavy long material; invention patent for the embedded smart AS/RS.
+- 2025: China's first export of an overhead-crane stacker AS/RS with cantilever racks.
+${guides}
 ## Contact
-- [Request a layout and budget price](${site.url}/contact/)
+- [Request a quote](${site.url}/contact/)
 - Email: ${site.contact.email}
+- Phone and WhatsApp: ${site.contact.phoneIntl}
 `
 );
 
@@ -89,7 +100,7 @@ writeFileSync(
 /en/custom/ / 301
 /en/contact/ /contact/ 301
 /en/* / 301
-`
+${insightPosts.length ? "" : "/insights/ / 301\n/insights/* / 301\n"}`
 );
 
 // Cloudflare Pages: caching and security headers

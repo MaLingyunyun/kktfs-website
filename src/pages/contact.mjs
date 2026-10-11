@@ -10,13 +10,13 @@ const contact = {
       path: "/contact/",
       title: "Contact Kinkalteck – Get an AS/RS Quote",
       description:
-        "Send your material sizes and floor plan to get a budget price and storage layout. Email, WhatsApp or call our international sales team.",
+        "Send your materials and floor plan for a quote on automated long-material storage. Email, WhatsApp or call our team.",
       schema: [breadcrumbSchema([["Home", "/"], ["Contact", "/contact/"]])],
       body: `
 <div class="wrap page contact-grid">
   <div>
-    <h1>Get a budget price and layout</h1>
-    <p class="lede">Tell us what you store. A sales engineer replies within one working day with a storage layout and a budget price.</p>
+    <h1>Request a quote</h1>
+    <p class="lede">Tell us what you store. Our team replies within one working day to discuss your materials, building and the right system.</p>
     <form class="enquiry" method="post" action="/api/enquiry">
       <div class="row2">
         <label>Name<input name="name" autocomplete="name" required></label>
@@ -40,7 +40,7 @@ const contact = {
       </div>
       <label>Message <span class="opt">(optional)</span><textarea name="message" rows="4" placeholder="Building size, machines to feed, timeline"></textarea></label>
       <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="btn btn-primary" type="submit">Request my layout and price</button>
+      <button class="btn btn-primary" type="submit">Send my request</button>
       <p class="fine">We use your details only to reply to this request.</p>
     </form>
   </div>
@@ -51,6 +51,7 @@ const contact = {
       ${c.whatsapp ? `<li>WhatsApp: <a href="https://wa.me/${c.whatsapp}">Start a chat</a></li>` : ""}
       ${c.zalo ? `<li>Zalo: ${esc(c.zalo)}</li>` : ""}
       ${c.line ? `<li>LINE: ${esc(c.line)}</li>` : ""}
+      ${c.wechat ? `<li>WeChat: ${esc(c.wechat)}</li>` : ""}
       ${c.phoneIntl ? `<li>Phone: <a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></li>` : ""}
     </ul>
     <h2>Factory</h2>
@@ -72,8 +73,8 @@ const thanks = {
       body: `
 <div class="wrap narrow page">
   <h1>Request received</h1>
-  <p class="lede">A sales engineer will reply within one working day. If you have a floor plan or material list, email it to <a href="mailto:${c.email}">${c.email}</a> so we can start on your layout.</p>
-  <p><a class="text-link" href="/insights/">Read our storage planning guides</a></p>
+  <p class="lede">A sales engineer will reply within one working day. If you have a floor plan or material list, email it to <a href="mailto:${c.email}">${c.email}</a>.</p>
+  <p><a class="text-link" href="/products/">Back to our systems</a></p>
 </div>`,
     }),
 };

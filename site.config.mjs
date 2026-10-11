@@ -4,9 +4,9 @@
 export const site = {
   url: "https://www.kktfs.com",
   name: "Kinkalteck",
-  legalName: "Kinkalteck Smart Intralog Co., Ltd.",
-  tagline: "Automated vertical storage for long and heavy materials",
-  founded: "2004",
+  legalName: "Kinkalteck Foshan",
+  tagline: "Shop-floor material-flow solutions for long and heavy materials",
+  founded: "2018",
   address: {
     street: "Robotics Integration Innovation Center, Shishan Town, Nanhai District",
     city: "Foshan",
@@ -16,10 +16,11 @@ export const site = {
   },
   contact: {
     email: "info@kinkalteck.com",
-    phoneIntl: "", // e.g. "+86 757 1234 5678" — the 400 number cannot be dialled from abroad
-    whatsapp: "", // digits only with country code, e.g. "8613800000000"
+    phoneIntl: "+86 139 0306 4452",
+    whatsapp: "8613903064452", // digits only with country code
     zalo: "", // Zalo phone number for Vietnam
     line: "", // LINE ID for Thailand
+    wechat: "huey63",
   },
   social: {
     linkedin: "",

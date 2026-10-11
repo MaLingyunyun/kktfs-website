@@ -1,10 +1,10 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { layout, markdown, parseFrontMatter, esc, abs, breadcrumbSchema, ctaBand } from "../lib.mjs";
 
 const dir = new URL("../../content/insights/", import.meta.url).pathname;
 
-const posts = readdirSync(dir)
+const posts = (existsSync(dir) ? readdirSync(dir) : [])
   .filter((f) => f.endsWith(".md"))
   .map((f) => {
     const { data, body } = parseFrontMatter(readFileSync(join(dir, f), "utf8"));
@@ -23,7 +23,7 @@ const index = {
       path: "/insights/",
       title: "Storage Planning Guides for Metal Processors | Kinkalteck",
       description:
-        "Practical guides to planning automated storage for bars, profiles, tubes and sheet metal: building size, system choice, floor load and layout.",
+        "Industry news and practical guides on automated storage and material flow for bars, profiles, tubes and sheet metal.",
       schema: [breadcrumbSchema([["Home", "/"], ["Guides", "/insights/"]])],
       body: `
 <div class="wrap narrow page">
@@ -73,10 +73,11 @@ const articles = posts.map((p) => ({
       }.</p>
   ${p.html}
 </article>
-${ctaBand("Get a first layout for your building", "Send your material and building dimensions. We'll reply with a layout and a budget price.")}
+${ctaBand("Tell us what you store", "Send your materials and floor plan. Our team replies within one working day.")}
 `,
     }),
 }));
 
 export const insightPosts = posts;
-export default [index, ...articles];
+// The index page is only published once there is at least one post.
+export default posts.length ? [index, ...articles] : [];

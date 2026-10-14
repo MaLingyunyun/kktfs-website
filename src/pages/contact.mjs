@@ -1,4 +1,4 @@
-import { layout, esc, breadcrumbSchema, icon } from "../lib.mjs";
+import { layout, esc, breadcrumbSchema, icon, wechatCard } from "../lib.mjs";
 import { site } from "../../site.config.mjs";
 
 const c = site.contact;
@@ -68,6 +68,7 @@ const contact = {
       ${c.wechat ? `<li>${icon("chat")}<span>WeChat: ${esc(c.wechat)}</span></li>` : ""}
       ${c.phoneIntl ? `<li>${icon("phone")}<span>Phone: <a href="tel:${c.phoneIntl.replace(/\s/g, "")}">${esc(c.phoneIntl)}</a></span></li>` : ""}
     </ul>
+    ${wechatCard({ size: 148 })}
     <h2>Factory</h2>
     <p class="factory">${esc(site.legalName)}<br>${esc(site.address.street)}<br>${esc(site.address.city)}, ${esc(site.address.region)}, ${esc(site.address.countryName)}</p>
   </aside>

@@ -18,6 +18,15 @@ export const SYSTEMS = [
   { name: "Overhead-crane stacker AS/RS", href: "/products/overhead-crane-storage/", icon: "long-load", from: 2, to: 20, len: "2–20 m", load: "up to 20 t", positions: "50–3,000 positions", stores: "Extra-long and heavy bars, tubes and profiles" },
 ];
 
+// WeChat QR card (QR only: no name or photo). Text carries the ID for visitors who cannot scan.
+export const wechatCard = ({ size = 132, cls = "" } = {}) =>
+  site.contact.wechat
+    ? `<figure class="wechat-card${cls ? " " + cls : ""}">
+  <img src="/img/wechat-qr.png" width="${size}" height="${size}" alt="WeChat QR code to add Kinkalteck sales, WeChat ID ${esc(site.contact.wechat)}" loading="lazy" decoding="async">
+  <figcaption><strong>Scan to add us on WeChat</strong><span>WeChat ID: ${esc(site.contact.wechat)}</span><span>Messages go straight to our management.</span></figcaption>
+</figure>`
+    : "";
+
 // Header band for inner pages: breadcrumb, title, lede and up to three key figures (all real text).
 export const pageHead = ({ crumbs = [], title, lede = "", iconName = "", figures = [] }) => `
 <header class="page-head">
@@ -355,6 +364,7 @@ ${body}
         ${c.wechat ? `<li>${icon("chat")}<span>WeChat: ${esc(c.wechat)}</span></li>` : ""}
         <li><a href="${site.sisterSite.url}" rel="noopener">${esc(site.sisterSite.name)}</a></li>
       </ul>
+      ${c.wechat ? `<img class="footer-qr" src="/img/wechat-qr.png" width="96" height="96" alt="WeChat QR code, WeChat ID ${esc(c.wechat)}" loading="lazy" decoding="async">` : ""}
     </div>
   </div>
   <div class="wrap footer-base">

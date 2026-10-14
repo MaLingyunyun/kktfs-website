@@ -1,4 +1,4 @@
-import { layout, photo, siteVideo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema, pageHead, icon, esc } from "../lib.mjs";
+import { layout, photo, siteVideo, wechatCard, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema, pageHead, icon, esc } from "../lib.mjs";
 import { site } from "../../site.config.mjs";
 
 // Honeycomb long-material AS/RS. Every figure on this page is boss-confirmed (see the project fact sheet).
@@ -235,7 +235,7 @@ ${pageHead({
     </div>
     <div class="sim-actions">
       <a class="btn btn-yellow" href="/contact/?topic=simulation">Request a 3D simulation of my plant</a>
-      ${site.contact.wechat ? `<p class="sim-wechat">${icon("chat")}<span>Or add us on WeChat: <strong>${esc(site.contact.wechat)}</strong></span></p>` : ""}
+      ${wechatCard({ size: 116, cls: "on-dark" })}
     </div>
     <p class="fine sim-note">Sample plant shown. Your simulation is prepared from your own data and shared only with you.</p>
   </div>

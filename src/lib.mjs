@@ -27,6 +27,46 @@ export const wechatCard = ({ size = 132, cls = "" } = {}) =>
 </figure>`
     : "";
 
+// Before/after comparison of a 3D simulation: drag (or use arrow keys) to reveal "today" over "with the new system".
+// Labels are HTML text placed over each image, so they stay readable for people and crawlers.
+export const simCompare = ({ before, after }) => {
+  const tags = (list) => `<ul class="compare-tags">${list.map(([t, x, y, cls]) => `<li${cls ? ` class="${cls}"` : ""} style="--x:${x}%;--y:${y}%">${esc(t)}</li>`).join("")}</ul>`;
+  return `
+<div class="compare" style="--pos:50%">
+  <figure class="compare-layer compare-after">
+    ${photo(after.img, after.alt)}
+    ${tags(after.tags)}
+  </figure>
+  <figure class="compare-layer compare-before">
+    ${photo(before.img, before.alt)}
+    ${tags(before.tags)}
+  </figure>
+  <span class="compare-label is-before">${esc(before.label)}</span>
+  <span class="compare-label is-after">${esc(after.label)}</span>
+  <span class="compare-handle" aria-hidden="true"><span></span></span>
+  <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare: ${esc(before.label)} and ${esc(after.label)}">
+</div>
+<script>(function(c){var r=c.querySelector(".compare-range"),set=function(v){c.style.setProperty("--pos",v+"%");r.value=v;},moved=false;
+r.addEventListener("input",function(){moved=true;set(r.value);});
+if(!window.IntersectionObserver||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();var t0=null,k=[50,28,72,50];
+requestAnimationFrame(function step(t){if(moved)return;t0=t0||t;var p=Math.min(1,(t-t0)/2600),i=Math.min(2,Math.floor(p*3)),f=p*3-i,e=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;set(Math.round(k[i]+(k[i+1]-k[i])*e));if(p<1)requestAnimationFrame(step);});},{threshold:.6});io.observe(c);})(document.currentScript.previousElementSibling);</script>`;
+};
+
+// The sample-plant comparison used on the home page and the honeycomb page
+export const SIM_SAMPLE = {
+  before: {
+    img: "sim-before", label: "Today",
+    alt: "3D simulation of a sample plant today: bar bundles stacked on the floor, moved by forklift and overhead crane, with two saw lines at the front",
+    tags: [["Bundles stacked on the floor", 31, 70], ["Forklift", 15, 55], ["Overhead crane", 74, 22], ["Saw lines", 10, 80, "hide-sm"]],
+  },
+  after: {
+    img: "sim-after", label: "With a honeycomb store",
+    alt: "3D simulation of the same sample plant with a Kinkalteck honeycomb store filling the hall, an inbound station by the truck and the saw lines beside the store",
+    tags: [["Honeycomb store", 66, 50], ["Inbound station", 16, 46], ["Saw lines beside the store", 12, 80, "hide-sm"]],
+  },
+};
+
 // Header band for inner pages: breadcrumb, title, lede and up to three key figures (all real text).
 export const pageHead = ({ crumbs = [], title, lede = "", iconName = "", figures = [] }) => `
 <header class="page-head">
@@ -250,8 +290,11 @@ const IMG = {
   "hc-robot-lift": [1280, 720],
   "hc-saws-beside": [1280, 720],
   "hc-dashboard": [1110, 640],
-  "sim-before": [1200, 703],
-  "sim-after": [1200, 703],
+  "sim-before": [1600, 900],
+  "sim-after": [1600, 900],
+  "sim-aisle": [1600, 900],
+  "sim-line": [1600, 900],
+  "sim-overview": [1200, 703],
 };
 export const photo = (name, alt, { eager = false, cls = "" } = {}) => {
   const [w, h] = IMG[name];

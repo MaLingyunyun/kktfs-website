@@ -1,4 +1,4 @@
-import { layout, ctaBand, faqBlock, faqSchema, photo, howItWorksVideo, icon, lengthRuler, wechatCard } from "../lib.mjs";
+import { layout, ctaBand, faqBlock, faqSchema, photo, howItWorksVideo, icon, lengthRuler, wechatCard, simCompare, SIM_SAMPLE } from "../lib.mjs";
 
 const faqs = [
   [
@@ -202,14 +202,8 @@ export default {
 <section class="section section-alt" id="simulation" aria-labelledby="sim-home-h">
   <div class="wrap sim-home">
     <div class="sim-home-pics">
-      <figure>
-        <span class="ba-label">Today</span>
-        ${photo("sim-before", "3D simulation of a sample plant today: bars stored in floor stacks and moved by an overhead crane")}
-      </figure>
-      <figure>
-        <span class="ba-label ba-after">With a honeycomb store</span>
-        ${photo("sim-after", "3D simulation of the same sample plant with a Kinkalteck honeycomb store and retrieval robot")}
-      </figure>
+      ${simCompare(SIM_SAMPLE)}
+      <p class="fine compare-hint">Drag the handle to compare. Sample plant shown.</p>
     </div>
     <div class="sim-home-text">
       <h2 id="sim-home-h">See your own plant in 3D before you decide</h2>
@@ -217,7 +211,6 @@ export default {
       <p>You receive the simulation video with your proposal. It is prepared from your own data and shared only with you.</p>
       <a class="btn btn-primary" href="/contact/?topic=simulation">Request a 3D simulation of my plant</a>
       ${wechatCard({ size: 104 })}
-      <p class="fine">Images show a sample plant.</p>
     </div>
   </div>
 </section>

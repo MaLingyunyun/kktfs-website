@@ -1,4 +1,4 @@
-import { layout, photo, siteVideo, wechatCard, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema, pageHead, icon, esc } from "../lib.mjs";
+import { layout, photo, siteVideo, wechatCard, simCompare, SIM_SAMPLE, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema, pageHead, icon, esc } from "../lib.mjs";
 import { site } from "../../site.config.mjs";
 
 // Honeycomb long-material AS/RS. Every figure on this page is boss-confirmed (see the project fact sheet).
@@ -222,23 +222,21 @@ ${pageHead({
       <h2 id="sim-h">See your own plant in 3D before you decide</h2>
       <p>Send us your floor plan and material list. Our engineers build a 3D simulation of your plant: your storage today next to a honeycomb store, with the material flow running from truck to saw. You receive the simulation video with your proposal.</p>
     </div>
-    <div class="sim-compare">
-      <figure>
-        <span class="ba-label">Today</span>
-        ${photo("sim-before", "3D simulation of a sample plant today: bars stored in floor stacks and moved by an overhead crane")}
-        <figcaption>Floor stacks and an overhead crane</figcaption>
-      </figure>
-      <figure>
-        <span class="ba-label ba-after">With a honeycomb store</span>
-        ${photo("sim-after", "3D simulation of the same sample plant with a Kinkalteck honeycomb store and retrieval robot")}
-        <figcaption>The same building with a honeycomb store</figcaption>
-      </figure>
+    <div class="sim-stage">
+      ${simCompare(SIM_SAMPLE)}
+      <p class="fine compare-hint">Drag the handle to compare. Sample plant shown.</p>
     </div>
+    <h3 class="sim-get-h">What your simulation shows</h3>
+    <ul class="sim-get">
+      <li>${photo("sim-overview", "3D simulation overview of a whole sample plant with a honeycomb store")}<strong>Your whole plant</strong><span>The building, the store, the trucks and the production lines, seen from above.</span></li>
+      <li>${photo("sim-aisle", "3D simulation view along the aisle of a honeycomb store with the orange retrieval robot")}<strong>Inside the store</strong><span>The retrieval robot travelling the aisle between the cassette racks.</span></li>
+      <li>${photo("sim-line", "3D simulation of the inbound end: a truck with bar bundles, the inbound station and two saw lines")}<strong>From truck to saw</strong><span>Unloading, the inbound station and the saws beside the store, in motion in the video.</span></li>
+    </ul>
     <div class="sim-actions">
       <a class="btn btn-yellow" href="/contact/?topic=simulation">Request a 3D simulation of my plant</a>
       ${wechatCard({ size: 116, cls: "on-dark" })}
     </div>
-    <p class="fine sim-note">Sample plant shown. Your simulation is prepared from your own data and shared only with you.</p>
+    <p class="fine sim-note">Your simulation is prepared from your own data and shared only with you.</p>
   </div>
 </section>
 

@@ -5,7 +5,7 @@
 //   ENQUIRY_FROM    – a sender on a domain verified in Resend, e.g. website@kktfs.com
 //   WEBHOOK_URL     – optional: also POST each enquiry as JSON (CRM, Google Sheet, etc.)
 
-const FIELDS = ["name", "company", "email", "phone", "country", "material", "length", "quantity", "message"];
+const FIELDS = ["topic", "name", "company", "email", "phone", "country", "material", "length", "quantity", "message"];
 
 export async function onRequestPost({ request, env }) {
   const form = await request.formData();

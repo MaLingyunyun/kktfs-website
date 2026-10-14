@@ -1,18 +1,5 @@
+import { honeycombPage } from "./honeycomb.mjs";
 import { layout, photo, howItWorksVideo, specTable, ctaBand, faqBlock, faqSchema, productSchema, breadcrumbSchema, pageHead, lengthRuler } from "../lib.mjs";
-
-const longSpecs = [
-  ["Material", "Steel and non-ferrous bars, profiles, tubes and pipes"],
-  ["Material length", "3–12 m"],
-  ["Load per storage position", "Up to 6 t"],
-  ["Position height and width", "Made to fit your bundle size"],
-  ["Number of positions", "100–3,000"],
-  ["Retrieval method", "Cassette (pallet) pull-out"],
-  ["Stacker crane travel speed", "120 m/min"],
-  ["Stacker crane acceleration", "0.5 m/s²"],
-  ["Retrieval cycle", "About 90 s (2,000-position system)"],
-  ["Rack", "Modular, quick to install, extendable"],
-  ["Software", "Kinkalteck WMS and WCS, API connection to your ERP"],
-];
 
 const sheetSpecs = [
   ["Material", "Steel and aluminium sheets and plates"],
@@ -38,25 +25,6 @@ const craneSpecs = [
   ["Software", "Kinkalteck WMS and WCS, API connection to your ERP"],
 ];
 
-const longFaqs = [
-  [
-    "Why are the levels lower than in other AS/RS?",
-    "Each honeycomb level is about 200 mm lower than in a fork-type AS/RS. Five honeycomb levels fit where a stacker-aisle store fits four, about 20% more storage in the same building height.",
-  ],
-  [
-    "Does every position need a cassette?",
-    "Yes. Every position in a honeycomb system holds a cassette sized to your bundles. The cassette protects the material and lets the stacker crane pull it out.",
-  ],
-  [
-    "Can the system connect to our ERP?",
-    "Yes. Our WMS tracks every bundle by QR code and position in real time and exchanges stock and order data with your ERP through an API. We develop the software ourselves and adapt it to your process.",
-  ],
-  [
-    "How do I get a quote?",
-    "Send your longest material length, bundle size and weight, how many bundles you store and your building dimensions. Our team replies within one working day.",
-  ],
-];
-
 const sheetFaqs = [
   [
     "What sizes of sheet can it store?",
@@ -78,70 +46,6 @@ const craneFaqs = [
     "Yes. QR-coded bundles, our WMS and WCS, and an API connection to your ERP, as in every Kinkalteck system.",
   ],
 ];
-
-const longPage = {
-  path: "/products/long-material-asrs/",
-  render: () =>
-    layout({
-      path: "/products/long-material-asrs/",
-      title: "Long Material Vertical Storage System (AS/RS) | Kinkalteck",
-      description:
-        "Honeycomb vertical storage for bars, profiles and tubes 3–12 m long, up to 6 t per position, 100–3,000 positions, with automatic feeding to your machines.",
-      schema: [
-        productSchema({
-          name: "Kinkalteck honeycomb long material AS/RS",
-          description:
-            "Automated honeycomb vertical storage and retrieval system for bars, profiles, tubes and pipes 3–12 m long, up to 6 t per storage position.",
-          path: "/products/long-material-asrs/",
-          specs: longSpecs,
-        }),
-        faqSchema(longFaqs),
-        breadcrumbSchema([["Home", "/"], ["Products", "/products/"], ["Long material AS/RS", "/products/long-material-asrs/"]]),
-      ],
-      body: `
-${pageHead({
-  crumbs: [["Home", "/"], ["Products", "/products/"], ["Long material AS/RS", ""]],
-  title: "Honeycomb vertical storage for bars, profiles and tubes",
-  lede: "Long, heavy material is stored in cassettes inside a modular honeycomb rack and delivered by a high-speed stacker crane. Saws and other machines stand right beside the store, a patented embedded design, so storage and production share one area.",
-  iconName: "bar-round",
-  figures: [["Material length", "3–12 m"], ["Load per position", "Up to 6 t"], ["Storage positions", "100–3,000"]],
-})}
-<div class="wrap narrow page">
-  <div class="gallery">
-    ${photo("aisle-steel", "Aisle of a Kinkalteck honeycomb long-material store with profiles in cassettes", { eager: true, cls: "g-main" })}
-    ${photo("rack-wall-orange", "Honeycomb storage wall with blue cassettes and orange stacker crane mast")}
-    ${photo("loading-platform-tubes", "Tubes on the loading platform of a honeycomb store")}
-  </div>
-  <h2>Specifications</h2>
-  ${specTable(longSpecs)}
-  <h2>What makes it different</h2>
-  <ul>
-    <li><strong>About 20% more storage in the same height.</strong> Each level is about 200 mm lower than in a fork-type AS/RS, so 5 honeycomb levels fit where a stacker-aisle store fits 4.</li>
-    <li><strong>Storage and workshop in one area.</strong> The patented embedded design puts your machines right beside the store, with no separate warehouse area.</li>
-    <li><strong>Automatic feeding, no material picker.</strong> Patented picking and feeding delivers material to the machine, first in, first out.</li>
-    <li><strong>Fast returns.</strong> Part-used bundles go back into storage instead of piling up beside the saw.</li>
-  </ul>
-  <h2>Built into your production flow</h2>
-  <ul>
-    <li><strong>Automatic weighing</strong> as bundles enter storage from the inbound platform.</li>
-    <li><strong>QR code on every bundle</strong>, with our own WMS and WCS and an API connection to your ERP.</li>
-    <li><strong>A buffer between processes</strong>: material comes back after heat treatment or cutting instead of going onto the floor.</li>
-  </ul>
-  <h2>See it work</h2>
-  ${howItWorksVideo("3D animation: inbound platform, five-axis gantry retrieval robot and automatic feeding to the work station")}
-  <h2>What we need for your quote</h2>
-  <ol>
-    <li>Longest material length and the bundle width, height and weight</li>
-    <li>How many bundles or product types you store</li>
-    <li>Your building's width, length and height</li>
-    <li>Which machines the system should feed</li>
-  </ol>
-  ${faqBlock(longFaqs)}
-</div>
-${ctaBand("Request a quote for your building", "Send your material list and floor plan. Our team replies within one working day.")}
-`,
-    }),
-};
 
 const sheetPage = {
   path: "/products/sheet-metal-asrs/",
@@ -279,4 +183,4 @@ ${ctaBand("Request a quote for long and heavy loads", "Send your floor plan and 
     }),
 };
 
-export default [overview, longPage, sheetPage, cranePage];
+export default [overview, honeycombPage, sheetPage, cranePage];

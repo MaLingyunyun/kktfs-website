@@ -17,7 +17,15 @@ const contact = {
   <div>
     <h1>Request a quote</h1>
     <p class="lede">Tell us what you store. Our team replies within one working day to discuss your materials, building and the right system.</p>
-    <form class="enquiry" method="post" action="/api/enquiry">
+    <form class="enquiry" id="form" method="post" action="/api/enquiry">
+      <label>What do you need?
+        <select name="topic" id="topic">
+          <option value="quote">A quote</option>
+          <option value="simulation">A 3D simulation of my plant</option>
+          <option value="visit">A visit to a running system</option>
+          <option value="other">Something else</option>
+        </select>
+      </label>
       <div class="row2">
         <label>Name<input name="name" autocomplete="name" required></label>
         <label>Company<input name="company" autocomplete="organization" required></label>
@@ -43,6 +51,12 @@ const contact = {
       <button class="btn btn-primary" type="submit">Send my request</button>
       <p class="fine">We use your details only to reply to this request.</p>
     </form>
+    <script>
+      (function () {
+        var t = new URLSearchParams(location.search).get("topic"), s = document.getElementById("topic");
+        if (t && s && s.querySelector('option[value="' + t + '"]')) s.value = t;
+      })();
+    </script>
   </div>
   <aside class="contact-side">
     <h2>Other ways to reach us</h2>

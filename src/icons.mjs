@@ -23,6 +23,11 @@ export const icons = {
   floor: `<rect x="3.5" y="3.5" width="17" height="17" rx="0.8"/><rect x="8.5" y="8.5" width="7" height="7" rx="0.5"/><path d="M4.8 4.8l2.7 2.7M19.2 4.8l-2.7 2.7M4.8 19.2l2.7-2.7M19.2 19.2l-2.7-2.7"/>`,
   operator: `<circle cx="12" cy="7" r="3.2"/><path d="M5.5 20.5v-2.2a4.8 4.8 0 0 1 4.8-4.8h3.4a4.8 4.8 0 0 1 4.8 4.8v2.2"/>`,
   hook: `<path d="M3 3.5h18M12 3.5v4"/><rect x="9.5" y="7.5" width="5" height="3" rx="0.5"/><path d="M12 10.5v3.2a2.8 2.8 0 1 1-2.8 2.8"/>`,
+  // Honeycomb system parts
+  cassette: `<path d="M2.5 9.5h19v6h-19z"/><circle cx="6.5" cy="12.5" r="1.6"/><circle cx="10.5" cy="12.5" r="1.6"/><circle cx="14.5" cy="12.5" r="1.6"/><path d="M2.5 15.5l1.5 2.5h16l1.5-2.5"/>`,
+  gantry: `<path d="M4 21V3.5h16V21M4 7h16"/><rect x="7" y="12" width="10" height="3" rx="0.5"/><path d="M12 7v5M2.5 21h19"/>`,
+  rack: `<rect x="3" y="3.5" width="18" height="17" rx="0.5"/><path d="M3 9.2h18M3 14.8h18M9 3.5v17M15 3.5v17"/>`,
+  fence: `<path d="M3 20.5h18M5 20.5V6M12 20.5V6M19 20.5V6M5 9.5h14M5 15h14"/><path d="M4 6l1-2 1 2M11 6l1-2 1 2M18 6l1-2 1 2"/>`,
   // Contact
   mail: `<rect x="3" y="5.5" width="18" height="13" rx="1"/><path d="m3.6 6.4 8.4 6.6 8.4-6.6"/>`,
   phone: `<path d="M8.4 3.5H5.6a1.6 1.6 0 0 0-1.6 1.7A15.3 15.3 0 0 0 18.8 20a1.6 1.6 0 0 0 1.7-1.6v-2.8l-3.8-1.6-2 2a11 11 0 0 1-5.2-5.2l2-2z"/>`,

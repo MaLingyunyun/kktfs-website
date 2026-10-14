@@ -235,11 +235,28 @@ const IMG = {
   "sheet-metal-asrs": [579, 501],
   "sheet-metal-install": [579, 458],
   "sheet-metal-station": [583, 481],
+  "hc-load-station": [1280, 720],
+  "hc-robot-wide": [1280, 720],
+  "hc-robot-front": [1280, 720],
+  "hc-robot-lift": [1280, 720],
+  "hc-saws-beside": [1280, 720],
+  "hc-dashboard": [1110, 640],
+  "sim-before": [1200, 703],
+  "sim-after": [1200, 703],
 };
 export const photo = (name, alt, { eager = false, cls = "" } = {}) => {
   const [w, h] = IMG[name];
   return `<picture${cls ? ` class="${cls}"` : ""}><source type="image/webp" srcset="/img/${name}.webp"><img src="/img/${name}.jpg" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture>`;
 };
+
+// Any site video: loaded only when the visitor presses play (preload="none"), muted, with a poster
+export const siteVideo = ({ src, poster, caption, width = 1280, height = 720 }) => `
+<figure class="video">
+  <video controls muted playsinline preload="none" poster="${poster}" width="${width}" height="${height}">
+    <source src="${src}" type="video/mp4">
+  </video>
+  <figcaption>${esc(caption)}</figcaption>
+</figure>`;
 
 // The 3D animation, loaded only when the visitor presses play
 export const howItWorksVideo = (caption) => `

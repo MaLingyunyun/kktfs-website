@@ -1,4 +1,4 @@
-import { layout, ctaBand, faqBlock, faqSchema, photo, howItWorksVideo, icon, lengthRuler } from "../lib.mjs";
+import { layout, ctaBand, faqBlock, faqSchema, photo, howItWorksVideo, icon, lengthRuler, wechatCard } from "../lib.mjs";
 
 const faqs = [
   [
@@ -27,7 +27,7 @@ const faqs = [
   ],
   [
     "How do I get a quote?",
-    "Send what you store (material, longest length, bundle weight), how much you store and the size of your building. Our team replies within one working day.",
+    "Send what you store (material, longest length, bundle weight), how much you store and the size of your building. Our team replies within one working day, and we can include a 3D simulation of your plant.",
   ],
 ];
 
@@ -72,7 +72,7 @@ export default {
         <span class="material-note">Honeycomb storage, 3–12 m</span></span>
       </a>
       <a class="material" href="/products/long-material-asrs/">
-        ${photo("loading-platform-tubes", "Tubes on the loading platform in front of a honeycomb store")}
+        ${photo("hc-load-station", "A bundle of bars on the inbound station of a honeycomb store, next to the orange retrieval robot")}
         <span class="material-body">${icon("tube", "material-icon")}<span class="material-name">Tubes and pipes</span>
         <span class="material-note">Honeycomb storage, up to 6 t per position</span></span>
       </a>
@@ -196,6 +196,29 @@ export default {
       </article>
     </div>
     <p class="more-systems">For tools, dies and parts: <a href="/products/">mini vertical storage</a>, 0.2–2 m, up to 2 t per position, 100–20,000 positions.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="simulation" aria-labelledby="sim-home-h">
+  <div class="wrap sim-home">
+    <div class="sim-home-pics">
+      <figure>
+        <span class="ba-label">Today</span>
+        ${photo("sim-before", "3D simulation of a sample plant today: bars stored in floor stacks and moved by an overhead crane")}
+      </figure>
+      <figure>
+        <span class="ba-label ba-after">With a honeycomb store</span>
+        ${photo("sim-after", "3D simulation of the same sample plant with a Kinkalteck honeycomb store and retrieval robot")}
+      </figure>
+    </div>
+    <div class="sim-home-text">
+      <h2 id="sim-home-h">See your own plant in 3D before you decide</h2>
+      <p>Send us your floor plan and material list. Our engineers build a 3D simulation of your plant: your storage today next to the new system, with the material flow running from truck to machine.</p>
+      <p>You receive the simulation video with your proposal. It is prepared from your own data and shared only with you.</p>
+      <a class="btn btn-primary" href="/contact/?topic=simulation">Request a 3D simulation of my plant</a>
+      ${wechatCard({ size: 104 })}
+      <p class="fine">Images show a sample plant.</p>
+    </div>
   </div>
 </section>
 

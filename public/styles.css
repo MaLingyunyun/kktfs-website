@@ -553,3 +553,31 @@ blockquote { margin: 0 0 1em; padding-left: 16px; border-left: 3px solid var(--l
 @media (max-width: 640px) {
   .wechat-card { gap: 14px; }
 }
+
+/* Sharper image layouts: never show a photo wider than its pixels */
+.hero-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.hero-pair img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--r); }
+.hero-pair figcaption { grid-column: 1 / -1; margin-top: 0; }
+.gallery-3 { grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; }
+.gallery-3 img { aspect-ratio: 1 / 1; }
+
+/* Home: 3D simulation entry */
+.sim-home { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; align-items: center; }
+.sim-home-pics { display: grid; gap: 14px; }
+.sim-home-pics figure { margin: 0; position: relative; }
+.sim-home-pics img { width: 100%; aspect-ratio: 1200 / 560; object-fit: cover; border-radius: var(--r); border: 1px solid var(--line); background: #e9edf1; }
+.sim-home-pics .ba-label { position: absolute; left: 12px; top: 12px; margin: 0; z-index: 1; }
+.sim-home-text h2 { margin-top: 0; }
+.sim-home-text .wechat-card { margin-top: 22px; }
+.sim-home-text .fine { margin: 10px 0 0; }
+@media (max-width: 900px) {
+  .sim-home { grid-template-columns: 1fr; gap: 28px; }
+  .sim-home-text { order: -1; }
+}
+@media (max-width: 640px) {
+  .hero-pair { grid-template-columns: 1fr; }
+  .hero-pair picture:nth-of-type(2) { display: none; }
+  .gallery-3 { grid-template-columns: 1fr 1fr; }
+  .gallery-3 picture:first-child { grid-column: 1 / span 2; }
+  .gallery-3 picture:first-child img { aspect-ratio: 4 / 3; }
+}

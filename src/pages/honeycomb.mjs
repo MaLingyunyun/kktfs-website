@@ -137,9 +137,10 @@ ${pageHead({
 })}
 
 <div class="wrap product-hero">
-  <figure>
-    ${photo("hc-robot-wide", "Kinkalteck honeycomb store: orange gantry retrieval robot in front of a blue rack full of bar bundles", { eager: true })}
-    <figcaption>A running honeycomb store in a customer's plant in China. The customer's name is confidential.</figcaption>
+  <figure class="hero-pair">
+    ${photo("rack-wall-orange", "Kinkalteck honeycomb store: blue cassette rack with the orange retrieval robot mast", { eager: true })}
+    ${photo("aisle-steel", "Aisle of a Kinkalteck honeycomb store with profiles stored in cassettes on both sides", { eager: true })}
+    <figcaption>Honeycomb stores in customers' plants in China. Customer names are confidential.</figcaption>
   </figure>
 </div>
 

@@ -75,8 +75,8 @@ ${pageHead({
   figures: [["Sheet size", "3–8 m × 1–2 m"], ["Load per position", "Up to 6 t"], ["Storage positions", "50–3,000"]],
 })}
 <div class="wrap narrow page">
-  <div class="gallery">
-    ${photo("sheet-metal-asrs", "Kinkalteck sheet metal storage tower with loading trolleys", { eager: true, cls: "g-main" })}
+  <div class="gallery gallery-3">
+    ${photo("sheet-metal-asrs", "Kinkalteck sheet metal storage tower with loading trolleys", { eager: true })}
     ${photo("sheet-metal-station", "Loading station of a sheet metal store")}
     ${photo("sheet-metal-install", "Sheet metal storage installed in a factory")}
   </div>
